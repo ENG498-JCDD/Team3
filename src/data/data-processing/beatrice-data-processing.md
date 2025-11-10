@@ -11,8 +11,8 @@ const data = FileAttachment("./datasets/MMG2025_2019-2023_Data_To_Share(County).
 d3.rollup(
   data,
   V => V.length,
-  d => d.,
-    d=> d.,
-      d => d.,
+  d => d["County, State"],
+    d=> d["Overall Food Insecurity Rate"],
+      d => d["Cost Per Meal"],
 )
 ```
