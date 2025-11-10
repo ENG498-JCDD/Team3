@@ -1,7 +1,7 @@
 # Processing Feeding America Data
 
 ```js
-const data = FileAttachment("./datasets/MMG2025_2019-2023_Data_To_Share(County).csv").csv({typed: true})
+const data1 = FileAttachment("./datasets/MMG2025_2019-2023_Data_To_Share(County).csv").csv({typed: true})
 ```
 
 ## Group by County, Food Insecurity (FI) Rate & Cost Per Meal
@@ -9,7 +9,7 @@ const data = FileAttachment("./datasets/MMG2025_2019-2023_Data_To_Share(County).
 ```js
 // Group by County, FI Rate & Cost Per Meal
 const foodInsecurityDataUS2019To2023 = d3.rollup(
-  data,
+  data1,
   V => V.length,
   d => d["County, State"],
     d=> d["Overall Food Insecurity Rate"],
