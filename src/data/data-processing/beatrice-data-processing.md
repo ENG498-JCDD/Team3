@@ -8,7 +8,7 @@ const data = FileAttachment("./datasets/MMG2025_2019-2023_Data_To_Share(County).
 
 ```js
 // Group by County, FI Rate & Cost Per Meal
-d3.rollup(
+const foodInsecurityDataUS2019To2023 = d3.rollup(
   data,
   V => V.length,
   d => d["County, State"],
@@ -16,3 +16,8 @@ d3.rollup(
       d => d["Cost Per Meal"],
 )
 ```
+
+```js
+console.log(foodInsecurityDataUS2019To2023)
+```
+
