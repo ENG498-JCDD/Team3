@@ -1,4 +1,4 @@
-geoid,area,population,populationError,snapHousehold,snapHouseholdError,oneOver60,oneOver60Error,noOver60,noOver60Error,nonSnapHousehold,nonSnapHouseholdError,oneOver60,oneOver60Error,noOver60,noOver60Error
+geoid,area,population,populationError,snapHousehold,snapHouseholdError,snapOneOver60,snapOneOver60Error,snapNoOver60,snapNoOver60Error,nonSnapHousehold,nonSnapHouseholdError,nonSnapOneOver60,nonSnapOneOver60Error,nonSnapNoOver60,nonSnapNoOver60Error
 05000US37183,"Wake County, NC",445636,1867,27193,1734,9021,818,18172,1449,418443,2417,131474,1634,286969,2594
 06000US3718390164,"Bartons Creek township, Wake County, NC",8220,456,99,53,54,41,45,36,8121,462,3767,283,4354,437
 06000US3718390420,"Buckhorn township, Wake County, NC",3897,418,0,21,0,21,0,21,3897,418,643,196,3254,433
