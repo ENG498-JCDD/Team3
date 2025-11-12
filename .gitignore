@@ -7,3 +7,11 @@ yarn-error.log
 # VS CODE
 settings.json
 .vscode
+
+# SECRETS
+.env
+
+# Too Large Datasets
+src/data/acs/usa_00004.csv
+src/data/acs/nc_acs_SNAP_data.csv
+src/data/acs/usa_00004.xml
