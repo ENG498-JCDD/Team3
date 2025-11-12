@@ -22,6 +22,7 @@ export default {
       open: false,
       pages: [
         {name: "data", path: "/counties-data"},
+        {name: "Wake County SNAP Households with Children", path: "/wc-snap-children"},
       ]
     },
  ]  
