@@ -4,10 +4,11 @@ import {InternMap,rollup,} from "d3-array";
 ```js
 let snapChildren = FileAttachment("./data/census-2023/wc-snap-households-with-children.csv").csv({typed: true})
 ```
+Orginal Data
 ```js
 snapChildren
 ```
-```js
+<!-- ```js
 let snapChildrenHouseholdMakeup = d3.group(
   snapChildren,
   (d) => d.area,
@@ -32,7 +33,8 @@ let percentageTest = snapChildren.map(area => ({
 ```
 ```js
 percentageTest
-```
+``` -->
+Cleaned Up Array of Objects (Map)
 ```js
 let childHouseholds = snapChildren.map(d => ({
   area: d.area,
@@ -78,12 +80,7 @@ childHouseholds
 ```
 ```js
 let childHouseholdsArray = Array.from(childHouseholds)
-```
-```js
-childHouseholdsArray
-```
 
-```js
 let stackedData = childHouseholdsArray.flatMap(d => [
   {area: d.area, type: "Single Mother", count: d.snap.withChildren.singleMother},
   {area: d.area, type: "Single Father", count: d.snap.withChildren.singleFather},
@@ -91,6 +88,10 @@ let stackedData = childHouseholdsArray.flatMap(d => [
   {area: d.area, type: "Non-Family With Children", count: d.snap.withChildren.nonFamilyHouseholds}
 ])
 
+```
+Gouping of Family Type (with Children) based on Area
+```js
+stackedData
 ```
 ```js
 Plot.plot({
@@ -122,3 +123,48 @@ Plot.plot({
     Plot.ruleY([0]),
   ]
 })
+```
+```js
+let singleMotherHouseholds = Array.from(childHouseholds)
+
+let singleMothers = singleMotherHouseholds.flatMap(d => [
+  {area: d.area, type: "SNAP:Single Mother", count: d.snap.withChildren.singleMother},
+  {area: d.area, type: "Non-SNAP: Single Mother", count: d.nonSnap.withChildren.singleMother},
+])
+
+```
+Gouping of Family Type (with Children) based on Area
+```js
+singleMothers
+```
+```js
+Plot.plot({
+  title: "SNAP Benefits Recipients: Types of Households with Children",
+  marginLeft:150,
+  width: 1000,
+  height: 700,
+  x: {
+    grid: true,
+    label: "# of Households"
+  },
+  y: {
+    grid: true,
+    label: "Township",
+  },
+  color: {
+    legend: true, // Show the color legend
+    scheme: "spectral" // Optional color scheme
+  },
+  marks: [
+    Plot.barX(singleMothers,
+      {
+        y:"area",
+        x:"count",
+        fill: "type",
+        tip:true
+      }
+    ),
+    Plot.ruleY([0]),
+  ]
+})
+```
