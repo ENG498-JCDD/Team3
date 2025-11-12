@@ -1,4 +1,4 @@
-geoid,race,totalPopulation,whiteAlone,blackOrAfricanAmericanAlone,americanIndianAndAlaskaNativeAlone,asianAlone,nativeHawaiianAndOtherPacificIslanderAlone,SomeOtherRaceAlone,twoOrMoreRaces,twoRacesIncludingSomeOtherRace,TwoRacesExcludingSomeOtherRaceAndThreeOrMoreRaces
+geoid,race,totalPopulation,error,whiteAlone,error,blackOrAfricanAmericanAlone,error,americanIndianAndAlaskaNativeAlone,error,asianAlone,error,nativeHawaiianAndOtherPacificIslanderAlone,error,SomeOtherRaceAlone,error,twoOrMoreRaces,twoRacesIncludingSomeOtherRace,error,TwoRacesExcludingSomeOtherRaceAndThreeOrMoreRaces,error
 05000US37183,"Wake County, NC",1151009,,683568,2801,221985,2336,3325,530,93193,1220,383,108,55569,4199,92986,3851,51664,3410,41322,2568
 06000US3718390164,"Bartons Creek township, Wake County, NC",22996,1493,19380,1381,1337,451,40,35,896,305,0,25,95,68,1248,336,575,221,673,312
 06000US3718390420,"Buckhorn township, Wake County, NC",12446,1692,8103,1765,1058,777,0,21,1818,779,0,21,130,125,1337,454,665,396,672,361

@@ -1,4 +1,4 @@
-geoid,poverty,totalHouseholds,householdReceivedSNAPInPast12Months, incomeInThePast12MonthsIsBelowPovertyLevel,incomeInThePast12MonthsIsAtOrAbovePovertyLevel,householdDidNotReceiveSNAPInPast12Months, incomeInThePast12MonthsIsBelowPovertyLevel2, incomeInThePast12MonthsIsAtOrAbovePovertyLevel2
+geoid,poverty,totalHouseholds,error,householdReceivedSNAPInPast12Months,error,incomeInThePast12MonthsIsBelowPovertyLevel,error,incomeInThePast12MonthsIsAtOrAbovePovertyLevel,error,householdDidNotReceiveSNAPInPast12Months,error,incomeInThePast12MonthsIsBelowPovertyLevel2,error, incomeInThePast12MonthsIsAtOrAbovePovertyLevel2,error
 05000US37183,"Wake County, NC",445636,1867,27193,1734,9665,936,17528,1399,418443,2417,25352,1398,393091,2706
 06000US3718390164,"Bartons Creek township, Wake County, NC",8220,456,99,53,27,33,72,45,8121,462,193,74,7928,463
 06000US3718390420,"Buckhorn township, Wake County, NC",3897,418,0,21,0,21,0,21,3897,418,241,164,3656,413
