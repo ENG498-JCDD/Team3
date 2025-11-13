@@ -1,0 +1,124 @@
+{
+    "release": {
+        "id": "acs2023_5yr",
+        "name": "ACS 2023 5-year",
+        "years": "2019-2023"
+    },
+    "tables": {
+        "B22002": {
+            "columns": {
+                "B22002001": {
+                    "indent": 0,
+                    "name": "Total:"
+                },
+                "B22002002": {
+                    "indent": 1,
+                    "name": "Household received Food Stamps/SNAP in the past 12 months:"
+                },
+                "B22002003": {
+                    "indent": 2,
+                    "name": "With children under 18 years:"
+                },
+                "B22002004": {
+                    "indent": 3,
+                    "name": "Married-couple family"
+                },
+                "B22002005": {
+                    "indent": 3,
+                    "name": "Other family:"
+                },
+                "B22002006": {
+                    "indent": 4,
+                    "name": "Male householder, no spouse present"
+                },
+                "B22002007": {
+                    "indent": 4,
+                    "name": "Female householder, no spouse present"
+                },
+                "B22002008": {
+                    "indent": 3,
+                    "name": "Nonfamily households"
+                },
+                "B22002009": {
+                    "indent": 2,
+                    "name": "No children under 18 years:"
+                },
+                "B22002010": {
+                    "indent": 3,
+                    "name": "Married-couple family"
+                },
+                "B22002011": {
+                    "indent": 3,
+                    "name": "Other family:"
+                },
+                "B22002012": {
+                    "indent": 4,
+                    "name": "Male householder, no spouse present"
+                },
+                "B22002013": {
+                    "indent": 4,
+                    "name": "Female householder, no spouse present"
+                },
+                "B22002014": {
+                    "indent": 3,
+                    "name": "Nonfamily households"
+                },
+                "B22002015": {
+                    "indent": 1,
+                    "name": "Household did not receive Food Stamps/SNAP in the past 12 months:"
+                },
+                "B22002016": {
+                    "indent": 2,
+                    "name": "With children under 18 years:"
+                },
+                "B22002017": {
+                    "indent": 3,
+                    "name": "Married-couple family"
+                },
+                "B22002018": {
+                    "indent": 3,
+                    "name": "Other family:"
+                },
+                "B22002019": {
+                    "indent": 4,
+                    "name": "Male householder, no spouse present"
+                },
+                "B22002020": {
+                    "indent": 4,
+                    "name": "Female householder, no spouse present"
+                },
+                "B22002021": {
+                    "indent": 3,
+                    "name": "Nonfamily households"
+                },
+                "B22002022": {
+                    "indent": 2,
+                    "name": "No children under 18 years:"
+                },
+                "B22002023": {
+                    "indent": 3,
+                    "name": "Married-couple family"
+                },
+                "B22002024": {
+                    "indent": 3,
+                    "name": "Other family:"
+                },
+                "B22002025": {
+                    "indent": 4,
+                    "name": "Male householder, no spouse present"
+                },
+                "B22002026": {
+                    "indent": 4,
+                    "name": "Female householder, no spouse present"
+                },
+                "B22002027": {
+                    "indent": 3,
+                    "name": "Nonfamily households"
+                }
+            },
+            "denominator_column_id": "B22002001",
+            "title": "Receipt of Food Stamps/SNAP in the Past 12 Months by Presence of Children Under 18 Years by Household Type for Households",
+            "universe": "Households"
+        }
+    }
+}
