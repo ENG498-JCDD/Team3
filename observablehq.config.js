@@ -12,7 +12,13 @@ export default {
       pages: [
         {name: "Processing Example", path: "/processing-example"},
       ]
-    }
+    },
+    {
+      name: "Beatrice Data Processing",
+      pages: [
+        {name: "Beatrice Data Processing", path: "/beatrice-data-processing"},
+      ]
+    },
   ],
 
   // Content to add to the head of the page, e.g. for a favicon:
