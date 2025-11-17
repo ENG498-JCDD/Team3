@@ -22,17 +22,18 @@ export default {
       open: false,
       pages: [
         {name: "data", path: "/counties-data"},
+        {name: "acs processing", path: "/acs-processing"},
       ]
     },
  ]  
-  pages: [
-    {
-      name: "Processing",
-      pages: [
-        {name: "Processing Example", path: "/processing-example"},
-      ]
-    }
-  ],
+  // pages: [
+  //   {
+  //     name: "Processing",
+  //     pages: [
+  //       {name: "Processing Example", path: "/processing-example"},
+  //     ]
+  //   }
+  // ],
 
   // Content to add to the head of the page, e.g. for a favicon:
   //head: '<link rel="icon" href="observable.png" type="image/png" sizes="32x32">',
