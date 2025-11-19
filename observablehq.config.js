@@ -19,6 +19,12 @@ export default {
         {name: "Beatrice Data Processing", path: "/beatrice-data-processing"},
       ]
     },
+        {
+      name: "SNAP Income Eligibility",
+      pages: [
+        {name: "SNAP Income Eligibility", path: "/snap-us-income-elig-fy20to26"},
+      ]
+    },
   ],
 
   // Content to add to the head of the page, e.g. for a favicon:
