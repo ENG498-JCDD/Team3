@@ -1,21 +1,28 @@
 # Processing USDA Income Eligibility Data
 
 ```js
-const snapIncomeLimitsFY2020To2026 = FileAttachment("./data/usda/FY20-26-SNAP-Income-Eligibility-Limits-for-Household-of-3.csv").csv({typed: true})
+const snapIncomeLimitsContigStates = FileAttachment("./data/usda/FY20-26-SNAP-Income-Eligibility-Limits-Contig-States.csv").csv({typed: true})
 ```
 
 ```js
-Array.from(snapIncomeLimitsFY2020To2026)
+Array.from(snapIncomeLimitsContigStates)
 ```
 
 ```js
 Plot.plot({
-  style: "overflow: visible;",
-  y: {grid: true},
+  x: {axis: null},
+  y: {tickFormat: "s", grid: true},
+  color: {scheme: "spectral", legend: true},
   marks: [
-    Plot.ruleY([0]),
-    Plot.lineY(stocks, {x: "fiscal_year", y: "income_limit", stroke: "Symbol"}),
-    Plot.text(stocks, Plot.selectLast({x: "Date", y: "Close", z: "Symbol", text: "Symbol", textAnchor: "start", dx: 3}))
+    Plot.barY(snapIncomeLimitsContigStates, {
+      x: "house_size",
+      y: "income_limit",
+      fill: "house_size",
+      fx: "fiscal_year",
+      color: {legend: true},
+      sort: {x: null, color: null, fx: {value: "-y", reduce: "sum"}}
+    }),
+    Plot.ruleY([0])
   ]
 })
 ```
