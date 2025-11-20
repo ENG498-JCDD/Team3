@@ -1,4 +1,9 @@
 ```js
+import {parseRaceData, assignRaceStringFunc, groupedByRaceFunc} from "./utils.js"
+import * as d3 from "d3";
+import {ascending,descending,sum,rollup,rollups} from "d3-array";
+```
+```js
 let wc2023Census = FileAttachment("./data/acs/nc_acs_SNAP_2023.csv").csv({typed: true})
 
 ```
@@ -39,17 +44,7 @@ RACE                Race [general version]
 8                   Two major races
 9                   Three or more major races
 
-```js
-// let parseRaceFunction = (persons) => {
-//   return persons.map(person => {
-//     if (person.RACE == 1){
-//       return "white"
-//     }
-//     else if (person.RACE == 2){
-//       return "black/african american"
-//     }
-//   })
-// }
+<!-- ```js
 function parseRaceData(data) {
   const raceLookup = {
     1: "White",
@@ -67,19 +62,6 @@ function parseRaceData(data) {
 }
 
 ```
-
-```js
-// let statusFunction = (voters) => {
-//   return voters.map(voter => {
-//     if (voter.ballot_rtn_dt == null || voter.ballot_rtn_dt == ""){
-//       return "This voter did not return their ballot."
-//     }
-//     else {
-//       return "This voter returned their ballot."
-//     }
-//   })
-// }
-```
 ```js
 let wcSnapByRace = wcSnap.map(person => ({
   ...person,
@@ -96,4 +78,11 @@ d3.group(wcSnapByRace,
 ```
 ```js
 //wcSnapByRace
+``` -->
+```js
+let wctestfuncsnap = groupedByRaceFunc(wcSnap)
+```
+testing functions
+```js
+wctestfuncsnap
 ```
