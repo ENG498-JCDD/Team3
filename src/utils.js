@@ -1,6 +1,8 @@
 import * as d3 from "d3";
 import {ascending,descending,sum,rollup,rollups} from "d3-array";
 
+
+//Filters data to only include people who receive SNAP benefits
 export const snapOnlyFunc = (data) => {
   let array = []
   for (const person of data){
