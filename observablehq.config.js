@@ -1,7 +1,8 @@
 // See https://observablehq.com/framework/config for documentation.
 export default {
+  header: "Team 3 - Beatrice Notebook",
   // The app’s title; used in the sidebar and webpage titles.
-  title: "Team 3 - Update Me!",
+  title: "Team 3 - Beatrice Notebook",
 
   // The pages and sections in the sidebar. If you don’t specify this option,
   // all pages will be listed in alphabetical order. Listing pages explicitly
@@ -11,18 +12,8 @@ export default {
       name: "Processing",
       pages: [
         {name: "Processing Example", path: "/processing-example"},
-      ]
-    },
-    {
-      name: "Beatrice Data Processing",
-      pages: [
-        {name: "Beatrice Data Processing", path: "/beatrice-data-processing"},
-      ]
-    },
-        {
-      name: "SNAP Income Eligibility",
-      pages: [
-        {name: "SNAP Income Eligibility", path: "/snap-us-income-elig-fy20to26"},
+        {name: "Grouping 2012-2022 NC SNAP Recipients by Race", path: "/acs-race-grouping-2012-22"},
+        {name: "SNAP Income Eligibility", path: "/snap-us-income-elig-fy20to26"}                
       ]
     },
   ],
