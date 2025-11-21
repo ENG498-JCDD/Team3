@@ -44,17 +44,17 @@ wc2012Census[0]
 
 ```js
 //This function filters the orginal data to only include SNAP recipients
-let wc2023Snap = snapOnlyFunc(wc2023Census)
+let wc2012Snap = snapOnlyFunc(wc2012Census)
 ```
 Only SNAP Recipients
 ```js
-wc2023Snap
+wc2012Snap
 ```
 ```js
 //Groups by race
-let wc2023SnapByRace = groupedByRaceFunc(wc2023Snap)
+let wc2012SnapByRace = groupedByRaceFunc(wc2012Snap)
 ```
 2023 SNAP Recipients by Race
 ```js
-wc2023SnapByRace
+wc2012SnapByRace
 ```
