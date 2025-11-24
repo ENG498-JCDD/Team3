@@ -40,7 +40,18 @@ const array = datasets.flatMap(([recipient, rows]) =>
 ```
 
 ```js
+const updatedData = array.map(({fiscal_year}) => ({
+  year: new Date(fiscal_year, 0, 1),
+}))
+```
 
+```js
+updatedData
+```
+
+
+FY 2020-2026 SNAP Income Limits for Household of 3 - Contiguous United States, D.C., Guam, and the Virgin Islands
+```js
 Plot.plot({
   style: "overflow: visible;",
   y: {grid: true, domain: [2000, 4000]},
