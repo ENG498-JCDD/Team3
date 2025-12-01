@@ -87,8 +87,8 @@ let stackedData = childHouseholdsArray.flatMap(d => [
   //type: labels the type of family
   //count: the variable to total from and label. 
   // make sure you a navigating through the objects correctly. (ex., since single mom snap houses are nested within "withChildren" and "snap you must type snap.withChildren.singleMother)
-  {area: d.area, type: "Single Female With Children", count: d.snap.withChildren.singleMother},
-  {area: d.area, type: "Single Male With Children", count: d.snap.withChildren.singleFather},
+  {area: d.area, type: "Single Mother", count: d.snap.withChildren.singleMother},
+  {area: d.area, type: "Single Father", count: d.snap.withChildren.singleFather},
   {area: d.area, type: "Married With Children", count: d.snap.withChildren.married},
   {area: d.area, type: "Non-Family With Children", count: d.snap.withChildren.nonFamilyHouseholds}
 ])
@@ -138,18 +138,18 @@ Plot.plot({
 let singleMotherHouseholds = Array.from(childHouseholds)
 //grouping of only single mother households, snap and non snap
 let singleMothers = singleMotherHouseholds.flatMap(d => [
-  {area: d.area, type: "SNAP:Single Female", count: d.snap.withChildren.singleMother},
-  {area: d.area, type: "Non-SNAP: Single Female", count: d.nonSnap.withChildren.singleMother},
+  {area: d.area, type: "SNAP:Single Mother", count: d.snap.withChildren.singleMother},
+  {area: d.area, type: "Non-SNAP: Single Mother", count: d.nonSnap.withChildren.singleMother},
 ])
 
 ```
-## SNAP status of single females in Wake County
+## SNAP status of single mothers in Wake County
 ```js
 singleMothers
 ```
 ```js
 Plot.plot({
-  title: "SNAP Benefits Recipients: Single Female Households with Children",
+  title: "SNAP Benefits Recipients: Types of Households with Children",
   marginLeft:150,
   width: 1000,
   height: 700,
