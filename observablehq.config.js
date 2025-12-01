@@ -18,12 +18,12 @@ export default {
  pages: [
     // GETTING STARTED
     {
-      name: "0. Getting Started",
+      name: "Wake County SNAP Data",
       open: false,
       pages: [
         {name: "data", path: "/counties-data"},
-        {name: "Wake County SNAP Households with Children", path: "/wc-snap-children"},
-        {name: "Wake County SNAP Households with Disabilities", path: "/wc-snap-disabilities"},
+        {name: "Wake County Households with Children", path: "/wc-snap-children"},
+        {name: "Wake County Households with Disabilities", path: "/wc-snap-disabilities"},
       ]
     },
  ]  

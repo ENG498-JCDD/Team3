@@ -63,13 +63,13 @@ let allDisabilityHouseholdsData = disabilityHouseholdsArray.flatMap(d => [
 ])
 
 ```
-Gouping of Family Type (with Children) based on Area
+Gouping of Disabiltiy Staus x SNAP Status based on Area
 ```js
 allDisabilityHouseholdsData
 ```
 ```js
 Plot.plot({
-  title: "SNAP Benefits Recipients: Types of Households with Children",
+  title: "SNAP Benefits Recipients: Households based on Disability Status",
   marginLeft:150,
   width: 1000,
   height: 700,
@@ -108,7 +108,47 @@ let onlyDisabilityHouseholdsData = disabilityHouseholdsArray.flatMap(d => [
 ```
 ```js
 Plot.plot({
-  title: "SNAP Benefits Recipients: Types of Households with Children",
+  title: "Households with 1 or More Disabled Individuals",
+  marginLeft:150,
+  width: 1000,
+  height: 700,
+  x: {
+    grid: true,
+    label: "# of Households",
+    color: "Red",
+  },
+  y: {
+    grid: true,
+    label: "Township",
+  },
+  color: {
+    legend: true, // Show the color legend
+    scheme: "Set1" // Optional color scheme
+  },
+  marks: [
+    Plot.barX(onlyDisabilityHouseholdsData,
+      {
+        y:"area",
+        x:"count",
+        fill: "type",
+        tip:true
+      }
+    ),
+    Plot.ruleY([0]),
+  ]
+})
+```
+```js
+let onlySnapHouseholdsDisability = disabilityHouseholdsArray.flatMap(d => [
+  {area: d.area, type: "SNAP: Disabled Individual in Household", count: d.snap.disabledIndividualInHousehold},
+  {area: d.area, type: "SNAP: No Disable Individuals in Household", count: d.snap.noDisabledIndividuals},
+ // {area: d.area, type: "non-SNAP: Disabled Individual in Household", count: d.nonSnap.disabledIndividualInHousehold},
+  // {area: d.area, type: "non-SNAP: No Disable Individuals in Household", count: d.nonSnap.noDisabledIndividuals},
+])
+```
+```js
+Plot.plot({
+  title: "Only SNAP Recipients: Disability Status",
   marginLeft:150,
   width: 1000,
   height: 700,
@@ -122,10 +162,10 @@ Plot.plot({
   },
   color: {
     legend: true, // Show the color legend
-    scheme: "spectral" // Optional color scheme
+    scheme: "Set1" // Optional color scheme
   },
   marks: [
-    Plot.barX(onlyDisabilityHouseholdsData,
+    Plot.barX(onlySnapHouseholdsDisability,
       {
         y:"area",
         x:"count",
