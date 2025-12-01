@@ -14,7 +14,7 @@ snapChildren
 
 let percentageTest = snapChildren.map(area => ({
   ...area,
-    percSnapChildren: (area.snapHouseholdWithChildren/area.population)*100,
+    percSnapChildren: (area.snapHouseholdWithChildren/(area.snapHouseholdWithChildren + area.nonSnapHouseholdWithChildren))*100,
     //percSnapNoChildren: (area.snapNoChildren/area.snapHousehold)*100,
   }
 )
@@ -221,7 +221,7 @@ Plot.plot({
   color: {
     type: "linear",
     scheme: "blues",
-    domain: [0, 10],
+    domain: [0, 25],
     legend: true,
   },
   marks: [
