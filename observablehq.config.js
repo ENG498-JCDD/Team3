@@ -18,7 +18,7 @@ export default {
  pages: [
     // GETTING STARTED
     {
-      name: "0. Getting Started",
+      name: "Wake County SNAP Data",
       open: false,
       pages: [
         {name: "data", path: "/counties-data"},
