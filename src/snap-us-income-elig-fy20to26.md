@@ -68,8 +68,9 @@ Plot.plot({
 })
 ```
 
+|
+SNAP/FNS Applications Received in North Carolina, 2019-2025 (in Thousands)
 ```js
-/*
 Plot.plot({
   y: {
     grid: true,
@@ -80,6 +81,5 @@ Plot.plot({
     Plot.barY(appsArray, {x: "Year", y: "Applications Received", sort: true})
   ]
 })
-*/
 ```
 
