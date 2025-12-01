@@ -33,8 +33,6 @@ over60Households
 //Convert the map back into an array so we can use Plot.plot
 let over60HouseholdsArray = Array.from(over60Households)
 
-//creating a flatMap to do another simple regrouping and prepare the data for a chart
-// this data set looks at the types of families with children who are receiving snap
 let stackedData = over60HouseholdsArray.flatMap(d => [
  
   {area: d.area, type: "SNAP Recipient Households Over 60", count: d.snap.snapOneOver60},
@@ -91,7 +89,7 @@ let membersOver60 = over60Households.flatMap(d => [
 ])
 
 ```
-SNAP status of single mothers in Wake County
+SNAP status of households with members over 60 in Wake County
 ```js
 membersOver60
 ```
