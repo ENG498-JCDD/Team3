@@ -141,3 +141,31 @@ wc2021SnapByRace
 ```js
 wc2022SnapByRace
 ```
+
+```js
+const wc2022SnapByRaceArray = Array.from(wc2022SnapByRace)
+```
+
+```js
+wc2022SnapByRaceArray
+```
+
+```js
+
+const wc2022Black = wc2022SnapByRaceArray.filter(recipient => recipient.RACE === "1")
+
+```
+
+```js
+/*
+const wc2022Black = d3.rollup(
+  wc2022SnapByRaceArray.filter(d => d.RACE === "1"),
+  D => D.length,
+  d => d.SEX
+);
+*/
+```
+
+```js
+wc2022Black
+```

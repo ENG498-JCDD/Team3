@@ -9,6 +9,7 @@ Array.from(snapIncomeLimitsContigStates)
 ```
 
 ```js
+/*
 Plot.plot({
   x: {axis: null},
   y: {tickFormat: "s", grid: true},
@@ -25,43 +26,37 @@ Plot.plot({
     Plot.ruleY([0])
   ]
 })
+*/
 ```
 
 ```js
 const datasets = [
-  ["48 States/DC/Guam/VI", await FileAttachment("./data/usda/contig_states.csv").csv({typed: true})],
+  ["48 States/DC/Guam/Virgin Islands", await FileAttachment("./data/usda/contig_states.csv").csv({typed: true})],
   ["Alaska", await FileAttachment("./data/usda/alaska.csv").csv({typed: true})],
   ["Hawaii", await FileAttachment("./data/usda/hawaii.csv").csv({typed: true})],
 ];
 
-const array = datasets.flatMap(([recipient, rows]) =>
+let array = datasets.flatMap(([recipient, rows]) =>
   rows.map(row => ({ recipient, ...row }))
 );
 ```
 
-```js
-const updatedData = array.map(({fiscal_year}) => ({
-  year: new Date(fiscal_year, 0, 1),
-}))
-```
-
-```js
-updatedData
-```
-
-
-FY 2020-2026 SNAP Income Limits for Household of 3 - Contiguous United States, D.C., Guam, and the Virgin Islands
+FY 2020-2026 SNAP Income Limits for Household of 3 - Contiguous United States/D.C./Guam/Virgin Islands, Alaska, Hawaii
 ```js
 Plot.plot({
   style: "overflow: visible;",
-  y: {grid: true, domain: [2000, 4000]},
+  y: {grid: true, domain: [2000, 4000], label: "Income Limit"},
+  x: {grid: true, label: "Fiscal  Year"},
   marks: [
     Plot.ruleY([0]),
     Plot.ruleX(array, Plot.pointerX({x: "fiscal_year", py: "income_limit", stroke: "red"})),
     Plot.lineY(array, {x: "fiscal_year", y: "income_limit", stroke: "recipient", marker: true}),
     Plot.text(array, Plot.selectLast({x: "Fiscal Year", y: "Income Limit", z: "Recipients", text: "Recipients", textAnchor: "start", dx: 3})),
     Plot.tip(array, Plot.pointerX({x: "fiscal_year", y: "income_limit"}))
-  ]
+  ],
+  color: {
+    legend: true
+  }
 })
 // NEXT: change x-axis year to date format (remove comma); then, add graph title and legend
 ```
