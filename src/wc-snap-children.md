@@ -8,16 +8,17 @@ Orginal Data
 ```js
 snapChildren
 ```
+
 ```js
 //Here I was testing out converting some data to percentages
 
-// let percentageTest = snapChildren.map(area => ({
-//   ...area,
-//     percSnapChildren: (area.snapHouseholdWithChildren/area.snapHousehold)*100,
-//     percSnapNoChildren: (area.snapNoChildren/area.snapHousehold)*100,
-//   }
-// )
-// )
+let percentageTest = snapChildren.map(area => ({
+  ...area,
+    percSnapChildren: (area.snapHouseholdWithChildren/area.population)*100,
+    //percSnapNoChildren: (area.snapNoChildren/area.snapHousehold)*100,
+  }
+)
+)
 ```
 ```js
 // percentageTest
@@ -142,7 +143,7 @@ let singleMothers = singleMotherHouseholds.flatMap(d => [
 ])
 
 ```
-SNAP status of single mothers in Wake County
+## SNAP status of single mothers in Wake County
 ```js
 singleMothers
 ```
@@ -176,4 +177,63 @@ Plot.plot({
     Plot.ruleY([0]),
   ]
 })
+```
+
+# Spatial Data
+
+```js
+let countyGeoJSON = FileAttachment("./data/wc-geo/Townships.geojson").json()
+```
+```js
+let areaPercChildren = new Map(percentageTest.map(d => [d.area, d.percSnapChildren]));
+
+// Combine GeoJSON with percentages
+countyGeoJSON.features.map(f => {
+  let areaName = f.properties.NAME; // adjust to your property name
+  f.properties.percSnapChildren = areaPercChildren.get(areaName);
+});
+
+let path = d3.geoPath(projection);
+
+```
+```js
+percentageTest
+
+```
+```js
+countyGeoJSON
+
+```
+```js
+//Latitude and Longitude Check
+//countyGeoJSON.features[0].geometry.coordinates[0][0]
+```
+```js
+import * as d3 from "d3";
+
+let projection = d3.geoMercator().fitSize([1200, 800], countyGeoJSON);
+```
+```js
+Plot.plot({
+  width: 1200,
+  height: 800,
+  projection,
+  color: {
+    type: "linear",
+    scheme: "blues",
+    domain: [0, 10],
+    legend: true,
+  },
+  marks: [
+    Plot.geo(countyGeoJSON,{
+      stroke: "black",
+      fill: "percSnapChildren",
+      tip: true
+    }),
+  ]
+})
+```
+```js
+//console.log(countyGeoJSON.features.properties)
+
 ```
