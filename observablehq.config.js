@@ -22,8 +22,9 @@ export default {
       open: false,
       pages: [
         {name: "data", path: "/counties-data"},
-        {name: "Wake County Households with Children", path: "/wc-snap-children"},
-        {name: "Wake County Households with Disabilities", path: "/wc-snap-disabilities"},
+        {name: "Wake County SNAP Households with Children", path: "/wc-snap-children"},
+        {name: "Wake County SNAP Households with Disabilities", path: "/wc-snap-disabilities"},
+        {name: "Spatial Processing", path: "/spatial-processing"},
       ]
     },
  ]  
