@@ -34,8 +34,8 @@ let over60HouseholdsArray = Array.from(over60Households)
 
 let stackedData = over60HouseholdsArray.flatMap(d => [
 
-  {area: d.area, type: "SNAP recepient over 60", count: d.snap.snapOneOver60},
-  {area: d.area, type: "Non-SNAP recepient over 60", count: d.nonSnap.nonSnapOneOver60},
+  {area: d.area, type: "SNAP recipient over 60", count: d.snap.snapOneOver60},
+  {area: d.area, type: "Non-SNAP recipient over 60", count: d.nonSnap.nonSnapOneOver60},
 ])
 ```
 Grouping based on area 
