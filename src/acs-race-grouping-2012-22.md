@@ -1,8 +1,71 @@
 # Grouping 2012-2022 NC SNAP Recipients by Race
 
+```js
+import {ascending,descending,sum,rollup,rollups} from "d3-array";
+import {utcParse,utcFormat} from "d3-time-format";
+```
 
 ```js
-import {oneLevelRollUpFlatMap, twoLevelRollUpFlatMap, getUniquePropListBy, sumUpWithReducerTests} from "./utils/utils.js"
+const oneLevelRollUpFlatMap = (data, level1Key, countKey) => {
+
+  // 1. Rollups on one level
+  const colTotals = rollups(
+    data,
+    (v) => v.length, // Count length of leaf node
+    (d) => d[level1Key] // d["race"]
+  )
+
+  // 2. Flatten back to array of objects
+  const flatTotals = colTotals.flatMap((e) => {
+    return {
+      [level1Key]: e[0],
+      [countKey]: e[1]
+    }
+  })
+
+  // 3. Return the sorted totals
+  return flatTotals
+}
+
+const twoLevelRollUpFlatMap = (data, level1Key, level2Key, countKey) => {
+
+  // 1. Rollups on 2 nested levels
+  const colTotals = rollups(
+    data,
+    (v) => v.length, //Count length of leaf node
+    (d) => d[level1Key], //Accessor at 1st level
+      (d) => d[level2Key], //Accessor at 2nd level
+  )
+
+  // 2. Flatten 1st grouped level back to array of objects
+  const flatTotals = colTotals.flatMap((l1Elem) => {
+
+    // 2.1 Assign level 1 key
+    let l1KeyValue = l1Elem[0]
+
+    // 2.2 Flatten 2nd grouped level
+    const flatLevels = l1Elem[1].flatMap((l2Elem) => {
+
+      // 2.2.1 Assign level 2 key
+      let l2KeyValue = l2Elem[0]
+
+      // l2Elem[1].flatMap()
+
+      // 2.2.2 Return fully populated object
+      return {
+        [level1Key]: l1KeyValue,
+        [level2Key]: l2KeyValue,
+        [countKey]: l2Elem[1]
+      }
+    })
+
+    // 3. Return flattened array of objects
+    return flatLevels
+  })
+
+  // 3. Return the sorted totals
+  return flatTotals
+}
 ```
 
 ```js
@@ -49,8 +112,8 @@ const groupedByRaceFunc = (data) => {
 ```
 
 ```js
-/*
 let wc2012Census = FileAttachment("./data/acs/nc_acs_SNAP_2012.csv").csv({typed: true});
+/*
 let wc2013Census = FileAttachment("./data/acs/nc_acs_SNAP_2013.csv").csv({typed: true});
 let wc2014Census = FileAttachment("./data/acs/nc_acs_SNAP_2014.csv").csv({typed: true});
 let wc2015Census = FileAttachment("./data/acs/nc_acs_SNAP_2015.csv").csv({typed: true});
@@ -66,8 +129,9 @@ let wc2022Census = FileAttachment("./data/acs/nc_acs_SNAP_2022.csv").csv({typed:
 
 ```js
 //This function filters the data to only include SNAP recipients
-/*
+
 let wc2012Snap = snapOnlyFunc(wc2012Census);
+/*
 let wc2013Snap = snapOnlyFunc(wc2013Census);
 let wc2014Snap = snapOnlyFunc(wc2014Census);
 let wc2015Snap = snapOnlyFunc(wc2015Census);
@@ -84,8 +148,9 @@ let wc2022Snap = snapOnlyFunc(wc2022Census);
 
 ```js
 //Groups by race
-/*
+
 let wc2012SnapByRace = groupedByRaceFunc(wc2012Snap);
+/*
 let wc2013SnapByRace = groupedByRaceFunc(wc2013Snap);
 let wc2014SnapByRace = groupedByRaceFunc(wc2014Snap);
 let wc2015SnapByRace = groupedByRaceFunc(wc2015Snap);
@@ -101,51 +166,52 @@ let wc2022SnapByRace = groupedByRaceFunc(wc2022Snap);
 
 2012 SNAP Recipients by Race
 ```js
-//wc2012SnapByRace
+wc2012SnapByRace
 ```
 
-2013 SNAP Recipients by Race
 ```js
+//2013 SNAP Recipients by Race
 //wc2013SnapByRace
 ```
 
-2014 SNAP Recipients by Race
+
 ```js
+//2014 SNAP Recipients by Race
 //wc2014SnapByRace
 ```
 
-2015 SNAP Recipients by Race
 ```js
+//2015 SNAP Recipients by Race
 //wc2015SnapByRace
 ```
 
-2016 SNAP Recipients by Race
 ```js
+//2016 SNAP Recipients by Race
 //wc2016SnapByRace
 ```
 
-2017 SNAP Recipients by Race
 ```js
+//2017 SNAP Recipients by Race
 //wc2017SnapByRace
 ```
 
-2018 SNAP Recipients by Race
 ```js
+//2018 SNAP Recipients by Race
 //wc2018SnapByRace
 ```
 
-2019 SNAP Recipients by Race
 ```js
+//2019 SNAP Recipients by Race
 //wc2019SnapByRace
 ```
 
-2020 SNAP Recipients by Race
 ```js
+//2020 SNAP Recipients by Race
 //wc2020SnapByRace
 ```
 
-2021 SNAP Recipients by Race
 ```js
+//2021 SNAP Recipients by Race
 //wc2021SnapByRace
 ```
 
@@ -155,55 +221,26 @@ wc2022SnapByRace
 ```
 
 ```js
-const wc2022SnapByRaceArray = Array.from(wc2022SnapByRace)
+//const wc2022SnapByRaceArray = Array.from(wc2022SnapByRace)
 ```
 
 ```js
-wc2022SnapByRaceArray
-```
-
-```js
-/*
-const wc2022Black = wc2022SnapByRaceArray.filter(recipient => recipient.RACE === "1")
-*/
+//wc2022SnapByRaceArray
 ```
 
 ```js
 /*
-const wc2022Black = d3.rollup(
-  wc2022SnapByRaceArray.filter(d => d.RACE === "1"),
-  D => D.length,
-  d => d.SEX
-);
-
-Inputs.table(
-  wc2022SnapByRace,
-  {
-    columns: ["RACE", "SEX", "AGE", "HCOVANY"],
-    rows: 15,
-    width: {
-      RACE: 20,
-      SEX: 20,
-      AGE: 20,
-      HCOVANY: 20,
-    },
-    header: {
-      RACE: "Race", 
-      SEX: "Sex",
-      AGE: "Age",
-      HCOVANY: "Health Insurance Coverage",
-    }
-  }
-)
-*/
 const byGenderAndAge = twoLevelRollUpFlatMap(
   wc2022SnapByRaceArray,
-  "SEX",
   "AGE",
+  "SEX",
   "af"
 )
+*/
 ```
 
 ```js
+/*
 byGenderAndAge
+*/
 ```
