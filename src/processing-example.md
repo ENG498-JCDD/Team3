@@ -66,7 +66,7 @@ Once you combine some years, this will include more data.
 
 ## Output as a CSV
 
-Check out the `utils/utils.js` file, wherein I included and imported the
+Check out the `utils/utils.js` file, wherein I included and imported the `downloadAsCSV` button. It includes info about how to use it in the comment above the function in the utils.js file.
 
 ```js
 view(
