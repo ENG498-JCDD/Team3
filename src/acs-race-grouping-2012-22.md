@@ -120,11 +120,12 @@ let wc2015Census = FileAttachment("./data/acs/nc_acs_SNAP_2015.csv").csv({typed:
 let wc2016Census = FileAttachment("./data/acs/nc_acs_SNAP_2016.csv").csv({typed: true});
 let wc2017Census = FileAttachment("./data/acs/nc_acs_SNAP_2017.csv").csv({typed: true});
 let wc2018Census = FileAttachment("./data/acs/nc_acs_SNAP_2018.csv").csv({typed: true});
+*/
 let wc2019Census = FileAttachment("./data/acs/nc_acs_SNAP_2019.csv").csv({typed: true});
 let wc2020Census = FileAttachment("./data/acs/nc_acs_SNAP_2020.csv").csv({typed: true});
 let wc2021Census = FileAttachment("./data/acs/nc_acs_SNAP_2021.csv").csv({typed: true});
-*/
 let wc2022Census = FileAttachment("./data/acs/nc_acs_SNAP_2022.csv").csv({typed: true});
+let wc2023Census = FileAttachment("./data/acs/nc_acs_SNAP_2023.csv").csv({typed: true});
 ```
 
 ```js
@@ -138,12 +139,57 @@ let wc2015Snap = snapOnlyFunc(wc2015Census);
 let wc2016Snap = snapOnlyFunc(wc2016Census);
 let wc2017Snap = snapOnlyFunc(wc2017Census);
 let wc2018Snap = snapOnlyFunc(wc2018Census);
+*/
 let wc2019Snap = snapOnlyFunc(wc2019Census);
 let wc2020Snap = snapOnlyFunc(wc2020Census);
 let wc2021Snap = snapOnlyFunc(wc2021Census);
-let wc2022SnapByRace = groupedByRaceFunc(wc2022Snap);
-*/
 let wc2022Snap = snapOnlyFunc(wc2022Census);
+let wc2023Snap = snapOnlyFunc(wc2023Census)
+```
+
+2023 Total SNAP Recipients
+```js
+const wc2023SnapArray = Array.from(wc2023Snap)
+```
+
+```js
+wc2023SnapArray.length
+```
+
+2022 Total SNAP Recipients
+```js
+const wc2022SnapArray = Array.from(wc2022Snap)
+```
+
+```js
+wc2022SnapArray.length
+```
+
+2021 Total SNAP Recipients
+```js
+const wc2021SnapArray = Array.from(wc2021Snap)
+```
+
+```js
+wc2021SnapArray.length
+```
+
+2020 Total SNAP Recipients
+```js
+const wc2020SnapArray = Array.from(wc2020Snap)
+```
+
+```js
+wc2020SnapArray.length
+```
+
+2019 Total SNAP Recipients
+```js
+const wc2019SnapArray = Array.from(wc2019Snap)
+```
+
+```js
+wc2019SnapArray.length
 ```
 
 ```js
@@ -160,13 +206,15 @@ let wc2018SnapByRace = groupedByRaceFunc(wc2018Snap);
 let wc2019SnapByRace = groupedByRaceFunc(wc2019Snap);
 let wc2020SnapByRace = groupedByRaceFunc(wc2020Snap);
 let wc2021SnapByRace = groupedByRaceFunc(wc2021Snap);
-*/
 let wc2022SnapByRace = groupedByRaceFunc(wc2022Snap);
+*/
+let wc2023SnapByRace = groupedByRaceFunc(wc2023Snap);
 ```
 
-2012 SNAP Recipients by Race
+
 ```js
-wc2012SnapByRace
+//2012 SNAP Recipients by Race
+//wc2012SnapByRace
 ```
 
 ```js
@@ -215,17 +263,14 @@ wc2012SnapByRace
 //wc2021SnapByRace
 ```
 
-2022 SNAP Recipients by Race
 ```js
-wc2022SnapByRace
+//2022 SNAP Recipients by Race
+//wc2022SnapByRace
 ```
 
 ```js
-//const wc2022SnapByRaceArray = Array.from(wc2022SnapByRace)
-```
-
-```js
-//wc2022SnapByRaceArray
+//2023 SNAP Recipients by Race
+//wc2023SnapByRace
 ```
 
 ```js
