@@ -77,3 +77,57 @@ Plot.plot({
     Plot.ruleY([0]),
   ]
 })
+```
+```js
+let snapCount= FileAttachment("./data/wc-snap-count/b19058.csv").csv({typed: true})
+```
+```js
+snapCount
+```
+
+# Number of Wake County Households Receiving SNAP
+```js
+
+Plot.plot({
+  width: 1000,
+  height: 600,
+  marginLeft: 50,
+  y: {
+    grid: true,
+    label: "# of Households"
+  },
+  x: {
+    label: "Year",
+  },
+  color: {
+    legend: true, // Show the color legend
+    scheme: "spectral" // Optional color scheme
+  },
+  marks: [
+    Plot.line(snapCount,
+      {
+        x:"year",
+        y:"withSnap",
+        stroke: "white",
+        tip:true
+      },
+    ),
+    Plot.line(snapCount,
+      {
+        x: "year",
+        y: "total",
+        stroke: "blue",
+        tip: true,
+      },
+    ),
+     Plot.line(snapCount,
+      {
+        x: "year",
+        y: "noSnap",
+        stroke: "red",
+        tip: true,
+      },
+    ),
+    Plot.ruleY([0]),
+  ]
+})
