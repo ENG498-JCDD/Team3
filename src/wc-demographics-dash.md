@@ -1,5 +1,6 @@
 ```js
-import {parseYear,snapYearFunc, snapCountsFunc, cleanAreaFunc} from "./components/utils.js";
+import {parseYear,snapYearFunc, snapCountsFunc, cleanAreaFunc, householdMappingFunc, snapChildrenPercFunc, stackedChildrenData, singleFemaleFunc, singleFemalePercFunc} from "./components/utils.js";
+import * as d3 from "d3";
 ```
 # Wake County SNAP Demographics
 
@@ -9,6 +10,11 @@ import {parseYear,snapYearFunc, snapCountsFunc, cleanAreaFunc} from "./component
 const launches = FileAttachment("data/launches.csv").csv({typed: true});
 let snapCount= FileAttachment("./data/wc-snap-count/b19058.csv").csv({typed: true})
 let wcMedianIncomes = FileAttachment("./data/census-2023/wc-median-household-income.csv").csv({typed: true})
+let snapChildren = FileAttachment("./data/census-2023/wc-snap-households-with-children.csv").csv({typed: true})
+let countyGeoJSON = FileAttachment("./data/wc-geo/Townships.geojson").json()
+
+console.log(typeof singleFemalePercFunc);
+
 ```
 
 <!-- Cards with big numbers -->
@@ -66,6 +72,7 @@ function launchSnapCount(data, {width} = {}) {
         x:"year",
         y:"value",
         stroke: "householdType",
+        strokeWidth: 3,
         tip:true
       },
     ),
@@ -81,7 +88,7 @@ function launchSnapCount(data, {width} = {}) {
   </div>
 </div>
 
-
+<!-- IncomeFunc -->
 ```js
 let cleanedWCIncomes = cleanAreaFunc(wcMedianIncomes)
 
@@ -118,48 +125,215 @@ function launchWCIncomes(data, {width} = {}) {
 })
 }
 ```
-<!-- Plot of launch vehicles -->
+<!-- Plot of Incomes -->
 <div class="grid grid-cols-1">
   <div class="card">
     ${resize((width) => launchWCIncomes(cleanedWCIncomes, {width}))}
   </div>
 </div>
-  <div class="card">
-    <h2>Households Receiving SNAP<span class="muted"> 2024</span></h2>
-    <span class="big">29,856</span>
-  </div>
-  <div class="card">
-    <h2>China 🇨🇳</h2>
-    <span class="big"></span>
-  </div>
-  <div class="card">
-    <h2>Other</h2>
-    <span class="big"></span>
-  </div>
-</div>
-
+ 
+<!-- children household func -->
 ```js
-function vehicleChart(data, {width}) {
+let childrenPerc = snapChildrenPercFunc(snapChildren)
+let snapChildrenMap = householdMappingFunc(childrenPerc)
+let finalChildrenData = stackedChildrenData(snapChildrenMap)
+
+function childHouseChart(finalChildrenData, {width}) {
   return Plot.plot({
-    title: "Popular launch vehicles",
-    width,
-    height: 300,
-    marginTop: 0,
-    marginLeft: 50,
-    x: {grid: true, label: "Launches"},
-    y: {label: null},
-    //color: {...color, legend: true},
-    marks: [
-      Plot.rectX(data, Plot.groupY({x: "count"}, {y: "family", fill: "state", tip: true, sort: {y: "-x"}})),
-      Plot.ruleX([0])
-    ]
-  });
+  title: "Types of SNAP Households with Children",
+  //move the margin so the town names are not cut off
+  marginLeft:150,
+  width: 1000,
+  height: 700,
+  x: {
+    grid: true,
+    label: "# of Households"
+  },
+  y: {
+    grid: true,
+    label: "Township",
+  },
+  color: {
+    //shows the legend
+    legend: true, 
+    scheme: "Observable10",
+  },
+  marks: [
+    //barX puts the area name on the y axis. I chose this bc of how long the names are so I prevented a jumbled mess
+    Plot.barX(finalChildrenData,
+    //Used the last grouped dataset (the one grouped by area, type, and count)
+      {
+        y:"area",
+        x:"count",
+        //filling by type will create the separately colored sections for each type of family
+        fill: "type",
+        tip:true,
+      }
+    ),
+    //adds an axis line
+    Plot.ruleY([0]),
+  ]
+})
 }
 ```
+<!-- SINGLE FEMALE FUNC -->
+```js
+let singleFemale = singleFemaleFunc(snapChildrenMap)
 
-<div class="grid grid-cols-1">
+function singleFemaleChart(data, {width}){
+  return Plot.plot({
+  title: "Comparison of Single Female Households",
+  marginLeft:150,
+  width: 1000,
+  height: 700,
+  x: {
+    grid: true,
+    label: "# of Households"
+  },
+  y: {
+    grid: true,
+    label: "Township",
+  },
+  color: {
+    legend: true, // Show the color legend
+    scheme: "Observable10"
+  },
+  marks: [
+    Plot.barX(singleFemale,
+      {
+        y:"area",
+        x:"count",
+        fill: "type",
+        tip:true
+      }
+    ),
+    Plot.ruleY([0]),
+  ]
+})
+}
+```
+<!-- spatial func -->
+```js
+let areaPercChild = new Map(childrenPerc.map(d => [d.area, d.percSnapChildren]))
+
+countyGeoJSON.features.map(f => {
+  let areaName = f.properties.NAME;
+  f.properties.percSnapChildren = areaPercChild.get(areaName)
+})
+let projection = d3.geoMercator().fitSize([1200, 800], countyGeoJSON)
+let path = d3.geoPath(projection)
+let centroids = countyGeoJSON.features.map(f => {
+  let [lon, lat] = d3.geoCentroid(f);
+  return {lon, lat, name: f.properties.NAME};
+})
+
+function spatialChildren(data, {width}){
+  return Plot.plot({
+  width: 1200,
+  height: 800,
+  projection,
+  color: {
+    type: "linear",
+    scheme: "blues",
+    domain: [0, 25],
+    legend: true,
+  },
+  marks: [
+    Plot.geo(countyGeoJSON,{
+      stroke: "black",
+      fill: "percSnapChildren",
+      tip: true
+    }),
+    Plot.text(centroids, {
+      x: "lon",
+      y: "lat",
+      text: "name",
+      fill: "white",
+      fontSize: 12,
+      textAnchor: "middle",
+      stroke: "black",
+      strokeWidth: 2
+    })
+  ]
+})}
+```
+```js
+let singleFemalePerc = singleFemalePercFunc(snapChildrenMap)
+
+// countyGeoJSON.features.map(f => {
+//   let areaName = f.properties.NAME;
+//   f.properties.singleFemalePerc = areaPercSingleFemale.get(areaName)
+// })
+// let projection = d3.geoMercator().fitSize([1200, 800], countyGeoJSON)
+// let path = d3.geoPath(projection)
+// let centroids = countyGeoJSON.features.map(f => {
+//   let [lon, lat] = d3.geoCentroid(f);
+//   return {lon, lat, name: f.properties.NAME};
+// })
+
+// Build a lookup map from the percentage array
+let areaPercSingleFemale = new Map(
+  singleFemalePerc.map(d => [d.area, d.percSnapSingleFemale])
+);
+
+// Attach the percentage to each GeoJSON feature
+countyGeoJSON.features.forEach(f => {
+  let areaName = f.properties.NAME;
+  f.properties.singleFemalePerc = areaPercSingleFemale.get(areaName);
+});
+
+// Define projection and path
+let projection = d3.geoMercator().fitSize([1200, 800], countyGeoJSON);
+let path = d3.geoPath(projection);
+
+// Compute centroids for labels
+let centroids = countyGeoJSON.features.map(f => {
+  let [lon, lat] = d3.geoCentroid(f);
+  return { lon, lat, name: f.properties.NAME };
+});
+
+
+function spatialSingleFemale(data, {width}){
+  return Plot.plot({
+  width: 1200,
+  height: 800,
+  projection,
+  color: {
+    type: "linear",
+    scheme: "blues",
+    domain: [0, 55],
+    legend: true,
+  },
+  marks: [
+    Plot.geo(countyGeoJSON,{
+      stroke: "black",
+      fill: "singleFemalePerc",
+      tip: true
+    }),
+    Plot.text(centroids, {
+      x: "lon",
+      y: "lat",
+      text: "name",
+      fill: "white",
+      fontSize: 12,
+      textAnchor: "middle",
+      stroke: "black",
+      strokeWidth: 2
+    })
+  ]
+})}
+```
+<div class="grid grid-cols-2">
   <div class="card">
-    ${resize((width) => vehicleChart(launches, {width}))}
+    ${resize((width) => childHouseChart(finalChildrenData, {width}))}
+  </div>
+  <div class="card"> ${resize((width) => singleFemaleChart(singleFemale, {width}))}
+  </div>
+  </div>
+<div class="grid grid-cols-2">
+  <div class = "card">${resize((width) => spatialChildren(countyGeoJSON, {width}))}
+  </div>
+  <div class = "card">${resize((width) => spatialSingleFemale(countyGeoJSON, {width}))}
   </div>
 </div>
 
