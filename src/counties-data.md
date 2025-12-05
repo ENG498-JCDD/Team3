@@ -79,7 +79,7 @@ Plot.plot({
 })
 ```
 ```js
-let snapCount= FileAttachment("./data/wc-snap-count/b19058.csv").csv({typed: true})
+
 ```
 ```js
 snapCount
@@ -87,7 +87,7 @@ snapCount
 
 # Number of Wake County Households Receiving SNAP
 ```js
-
+let snapCount= FileAttachment("./data/wc-snap-count/b19058.csv").csv({typed: true})
 Plot.plot({
   width: 1000,
   height: 600,
@@ -131,3 +131,4 @@ Plot.plot({
     Plot.ruleY([0]),
   ]
 })
+```

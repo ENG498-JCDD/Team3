@@ -1,3 +1,6 @@
+```js
+import {parseYear,snapYearFunc, snapCountsFunc} from "./components/utils.js";
+```
 ---
 theme: dashboard
 title: Example dashboard
@@ -16,11 +19,8 @@ let snapCount= FileAttachment("./data/wc-snap-count/b19058.csv").csv({typed: tru
 <!-- A shared color scale for consistency, sorted by the number of launches -->
 
 ```js
-const typeOfCount = [
-  ...snapCount.map(d => ({year: d.year, value: d.withSnap, householdType: "With SNAP"})),
-  ...snapCount.map(d => ({year: d.year, value: d.total, householdType: "Total Households"})),
-  ...snapCount.map(d => ({year: d.year, value: d.noSnap, householdType: "No SNAP"}))
-]
+
+
 ```
 
 <!-- Cards with big numbers -->
@@ -47,7 +47,13 @@ const typeOfCount = [
 <!-- Plot of launch history -->
 
 ```js
+let formatSnapYears = snapYearFunc(snapCount)
+console.log(formatSnapYears)
+
+let snapHouseGroupCounts = snapCountsFunc(formatSnapYears)
+
 function launchSnapCount(data, {width} = {}) {
+(snapHouseGroupCounts)
   return Plot.plot({
   title: "Number of Households in Wake County (2010-2024)",
   style: {
@@ -71,7 +77,7 @@ function launchSnapCount(data, {width} = {}) {
     legend: true,
   },
   marks: [
-    Plot.line(typeOfCount,
+    Plot.line(snapHouseGroupCounts,
       {
         x:"year",
         y:"value",
