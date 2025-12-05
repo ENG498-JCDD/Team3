@@ -1,12 +1,6 @@
 ```js
-import {parseYear,snapYearFunc, snapCountsFunc} from "./components/utils.js";
+import {parseYear,snapYearFunc, snapCountsFunc, cleanAreaFunc} from "./components/utils.js";
 ```
----
-theme: dashboard
-title: Example dashboard
-toc: false
----
-
 # Wake County SNAP Demographics
 
 <!-- Load and transform the data -->
@@ -14,18 +8,12 @@ toc: false
 ```js
 const launches = FileAttachment("data/launches.csv").csv({typed: true});
 let snapCount= FileAttachment("./data/wc-snap-count/b19058.csv").csv({typed: true})
-```
-
-<!-- A shared color scale for consistency, sorted by the number of launches -->
-
-```js
-
-
+let wcMedianIncomes = FileAttachment("./data/census-2023/wc-median-household-income.csv").csv({typed: true})
 ```
 
 <!-- Cards with big numbers -->
 
-<div class="grid grid-cols-4">
+<div class="grid grid-cols-3">
   <div class="card">
     <h2>Wake County Households<span class="muted"> 2024</span></h2>
     <span class="big">499,951</span>
@@ -35,12 +23,8 @@ let snapCount= FileAttachment("./data/wc-snap-count/b19058.csv").csv({typed: tru
     <span class="big">29,856</span>
   </div>
   <div class="card">
-    <h2>China 🇨🇳</h2>
-    <span class="big"></span>
-  </div>
-  <div class="card">
-    <h2>Other</h2>
-    <span class="big"></span>
+    <h2>Percentage of Wake County Households Receiving SNAP</h2>
+    <span class="big">5.97%</span>
   </div>
 </div>
 
@@ -71,7 +55,7 @@ function launchSnapCount(data, {width} = {}) {
   },
   x: {
     label: "Year",
-    //tickFormat: d3.utcFormat("%Y"),
+    tickPadding: 5,
   },
   color: {
     legend: true,
@@ -90,14 +74,69 @@ function launchSnapCount(data, {width} = {}) {
 })
 }
 ```
-
+<!-- div skeleton -->
 <div class="grid grid-cols-1">
   <div class="card">
     ${resize((width) => launchSnapCount(snapCount, {width}))}
   </div>
 </div>
 
+
+```js
+let cleanedWCIncomes = cleanAreaFunc(wcMedianIncomes)
+
+function launchWCIncomes(data, {width} = {}) {
+(cleanedWCIncomes)
+  return Plot.plot({
+  title: "Median SNAP Household Annual Income",
+  marginBottom: 100,
+  y: {
+    grid: true,
+    label: "Annual Household Income",
+  },
+  x: {
+    tickPadding: 5,
+    tickRotate: -50,
+    label: "Wake County Township",
+  },
+  tip: true,
+  marks:[
+    Plot.barY(cleanedWCIncomes,
+    {
+      x:"area",
+      y:"snapHouseholdIncome",
+      fill: "#1f77b4",
+      tip: true,
+    }),
+    Plot.ruleY([0]),
+    Plot.ruleY([59000], {
+      stroke: "red",
+      tip: true,
+      title: d => "Poverty Line ($59,000)",
+  }),
+  ]
+})
+}
+```
 <!-- Plot of launch vehicles -->
+<div class="grid grid-cols-1">
+  <div class="card">
+    ${resize((width) => launchWCIncomes(cleanedWCIncomes, {width}))}
+  </div>
+</div>
+  <div class="card">
+    <h2>Households Receiving SNAP<span class="muted"> 2024</span></h2>
+    <span class="big">29,856</span>
+  </div>
+  <div class="card">
+    <h2>China 🇨🇳</h2>
+    <span class="big"></span>
+  </div>
+  <div class="card">
+    <h2>Other</h2>
+    <span class="big"></span>
+  </div>
+</div>
 
 ```js
 function vehicleChart(data, {width}) {
