@@ -86,7 +86,7 @@ let over60WCHouseholds = Array.from(over60Households)
 //grouping of only households with members over 60, snap and non snap
 let membersOver60 = over60Households.flatMap(d => [
   {area: d.area, type: "SNAP: Member Over 60", count: d.snap.over60},
-  {area: d.area, type: "Non-SNAP: Member Over 60", count: d.nonSnap.memberover60},
+  {area: d.area, type: "Non-SNAP: Member Over 60", count: d.nonSnap.memberOver60},
 ])
 ```
 SNAP status of households with members over 60 in Wake County
@@ -96,7 +96,7 @@ membersOver60
 ```js
 Plot.plot({
   title: "SNAP Benefits Recipients: Types of Households with Members Over 60",
-  marginLeft:150,
+  marginLeft: 150,
   width: 1000,
   height: 700,
   x: {
