@@ -20,7 +20,7 @@ let over60Households = snapOver60.map(d => ({
     },
   nonSnap: {
     totalHouseholds: d.nonSnapHousehold,
-    memberover60: d.nonSnapOneOver60,
+    memberOver60: d.nonSnapOneOver60,
     noMemberOver60: d.nonSnapNoOver60,
   },
 }))
