@@ -144,7 +144,7 @@ The majority of SNAP Households in Wake County fall beneath the poverty line wit
 ***Note***: Bartons Creek, Buckhorn, and White Oak did not have any SNAP households in 2024.
 
 
- ## Household Types
+ ## Household Types (based on presence of children)
 
 <!-- children household func -->
 ```js
@@ -265,7 +265,7 @@ function spatialChildren(data, {width}){
       y: "lat",
       text: "name",
       fill: "white",
-      fontSize: 12,
+      fontSize: 18,
       textAnchor: "middle",
       stroke: "black",
       strokeWidth: 2
@@ -319,7 +319,7 @@ function spatialSingleFemale(data, {width}){
       y: "lat",
       text: "name",
       fill: "white",
-      fontSize: 12,
+      fontSize: 18,
       textAnchor: "middle",
       stroke: "black",
       strokeWidth: 2
