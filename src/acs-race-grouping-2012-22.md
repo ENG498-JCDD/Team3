@@ -147,7 +147,7 @@ let wc2022Snap = snapOnlyFunc(wc2022Census);
 let wc2023Snap = snapOnlyFunc(wc2023Census)
 ```
 
-2023 Total SNAP Recipients
+2023 Total SNAP Recipients in Wake County
 ```js
 const wc2023SnapArray = Array.from(wc2023Snap)
 ```
