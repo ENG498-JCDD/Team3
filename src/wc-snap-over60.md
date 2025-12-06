@@ -15,8 +15,8 @@ let over60Households = snapOver60.map(d => ({
   population: d.population,
   snap: {
     totalHouseholds: d.snapHousehold,
-    memberOver60: d.snapOneOver60,
-    noMemberOver60: d.snapNoOver60,
+    over60: d.snapOneOver60,
+    noOver60: d.snapNoOver60,
     },
   nonSnap: {
     totalHouseholds: d.nonSnapHousehold,
@@ -33,15 +33,16 @@ over60Households
 //Convert the map back into an array so we can use Plot.plot
 let over60HouseholdsArray = Array.from(over60Households)
 
-let stackedData = over60HouseholdsArray.flatMap(d => [
- 
-  {area: d.area, type: "SNAP Recipient Households Over 60", count: d.snap.snapOneOver60},
-  {area: d.area, type: "Non-SNAP Recipient Households Over 60", count: d.snap.nonSnapOneOver60},
+let allOver60Data = over60HouseholdsArray.flatMap(d => [
+  {area: d.area, type: "SNAP: Individual Over 60 in Household", count: d.snap.over60},
+  {area: d.area, type: "SNAP: No Individual Over 60 in Household", count: d.snap.noOver60},
+  {area: d.area, type: "non-SNAP: Individual Over 60 in Household", count: d.nonSnap.memberover60},
+  {area: d.area, type: "non-SNAP: No Individual Over 60 in Household", count: d.nonSnap.noMemberOver60},
 ])
 ```
-Gouping of Household Type (Over or Under 60) based on Area
+Grouping of Household Type (Over or Under 60) based on Area
 ```js
-stackedData
+allOver60Data
 ```
 ```js
 Plot.plot({
@@ -65,7 +66,7 @@ Plot.plot({
   },
   marks: [
     //barX puts the area name on the y axis. I chose this bc of how long the names are so I prevented a jumbled mess
-    Plot.barX(stackedData,
+    Plot.barX(allOver60Data,
     //Used the last grouped dataset (the one grouped by area, type, and count)
       {
         y:"area",
@@ -84,10 +85,9 @@ Plot.plot({
 let over60WCHouseholds = Array.from(over60Households)
 //grouping of only households with members over 60, snap and non snap
 let membersOver60 = over60Households.flatMap(d => [
-  {area: d.area, type: "SNAP: Member Over 60", count: d.snap.snapOneOver60},
-  {area: d.area, type: "Non-SNAP: Member Over 60", count: d.nonSnap.nonSnapOneOver60},
+  {area: d.area, type: "SNAP: Member Over 60", count: d.snap.over60},
+  {area: d.area, type: "Non-SNAP: Member Over 60", count: d.nonSnap.memberover60},
 ])
-
 ```
 SNAP status of households with members over 60 in Wake County
 ```js
