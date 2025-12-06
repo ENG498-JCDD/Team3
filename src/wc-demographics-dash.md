@@ -90,6 +90,8 @@ function launchSnapCount(data, {width} = {}) {
   </div>
 </div>
 
+From 2010 to 2024, the population in Wake County has steadily increased. However, the number of households receiving SNAP has remained relatively the same. As cost-of-living has risen over the past few years, we would expect that more households would rely on SNAP for groceries. This trend shows the opposite despite the fact that 126,110 Wake County residents are food insecure (Wake.gov)
+
 ## Income
 
 <!-- IncomeFunc -->
@@ -99,7 +101,7 @@ let cleanedWCIncomes = cleanAreaFunc(wcMedianIncomes)
 function launchWCIncomes(data, {width} = {}) {
 (cleanedWCIncomes)
   return Plot.plot({
-  title: "Median SNAP Household Annual Income",
+  title: "Median SNAP Household Annual Income (2024)",
   marginBottom: 100,
   y: {
     grid: true,
@@ -134,7 +136,13 @@ function launchWCIncomes(data, {width} = {}) {
   <div class="card">
     ${resize((width) => launchWCIncomes(cleanedWCIncomes, {width}))}
   </div>
+  </div>
 </div>
+
+The majority of SNAP Households in Wake County fall beneath the poverty line with most townships' SNAP households making less than $40,000 per year.
+
+***Note***: Bartons Creek, Buckhorn, and White Oak did not have any SNAP households in 2024.
+
 
  ## Household Types
 
@@ -298,6 +306,7 @@ function spatialSingleFemale(data, {width}){
     domain: [0, 55],
     legend: true,
     label: "Percentage",
+    ticks: 5,
   },
   marks: [
     Plot.geo(countyGeoJSON,{
@@ -331,6 +340,11 @@ function spatialSingleFemale(data, {width}){
   <div class = "card">${resize((width) => spatialSingleFemale(countyGeoJSON, {width}))}
   </div>
 </div>
+
+As we look at SNAP households with children, the majority of households are categorized as "Single Female". This group encompasses single mothers and other non-married single female householders with children. About 1/3 of all single female houses (with children) in Wake County receive SNAP benefits. Raleigh has the highest concentration of single women with kids who receive SNAP and households with children who receive SNAP. 
+
+Single mothers likely receive SNAP benefits at a higher rate due to multiple economic factors. These include lower wages, increased cost of childcare, and having only a single source of income. Other factors like race and education also play a role in income. Unfortunately, ACS data does not show the intersections of these factors.
+
 
 ```js
 let wcHouseYearsMap = houseMapYearFunc(wcHouseYears)
@@ -395,15 +409,13 @@ function launchHouseholdYears(data, {width} = {}) {
 })
 }
 ```
+
 ```js
 let singleMotherCompData = singleMotherCompFunc(wcHouseYearsMap)
-
 let regression = regressionLinear()
   .x(d => d.year)
   .y(d => d.perc)
-
 let regLine = regression(singleMotherCompData)
-
 
 function launchCompHouseholdYears(data, {width} = {}) {
 (singleMotherCompData)
@@ -457,6 +469,7 @@ function launchCompHouseholdYears(data, {width} = {}) {
 })
 }
 ```
+### Single Female Households (with children) Over the Last Decade
 <!-- div skeleton -->
 <div class="grid grid-cols-1">
   <div class="card">
@@ -467,5 +480,11 @@ function launchCompHouseholdYears(data, {width} = {}) {
   </div>
 </div>
 
+Overall the percentage SNAP households with a female householder and children has remained steady over the past decade. The same is true when comparing SNAP and non-SNAP single women with children. Although each township shows individual variability over the years, the Wake County avg has remained the same.
+
+
+### Data & Resources
 
 Data: Jonathan C. McDowell, [General Catalog of Artificial Space Objects](https://planet4589.org/space/gcat)
+
+Resources: Wake County: [Wake County Food Security Program](https://www.wake.gov/departments-government/wake-county-food-security-program)
