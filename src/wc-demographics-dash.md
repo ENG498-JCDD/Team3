@@ -1,6 +1,7 @@
 ```js
-import {parseYear,snapYearFunc, snapCountsFunc, cleanAreaFunc, householdMappingFunc, snapChildrenPercFunc, stackedChildrenData, singleFemaleFunc, singleFemalePercFunc} from "./components/utils.js";
+import {parseYear,snapYearFunc, snapCountsFunc, cleanAreaFunc, householdMappingFunc, snapChildrenPercFunc, stackedChildrenData, singleFemaleFunc, singleFemalePercFunc, stackedHouseFunc, houseMapYearFunc, stackedHousePercFunc, singleMotherFunc, singleMotherCompFunc} from "./components/utils.js";
 import * as d3 from "d3";
+import {regressionLinear, regressionPolynomial} from "npm:d3-regression"
 ```
 # Wake County SNAP Demographics
 
@@ -12,6 +13,7 @@ let snapCount= FileAttachment("./data/wc-snap-count/b19058.csv").csv({typed: tru
 let wcMedianIncomes = FileAttachment("./data/census-2023/wc-median-household-income.csv").csv({typed: true})
 let snapChildren = FileAttachment("./data/census-2023/wc-snap-households-with-children.csv").csv({typed: true})
 let countyGeoJSON = FileAttachment("./data/wc-geo/Townships.geojson").json()
+let wcHouseYears = FileAttachment("./data/wc-snap-count/acs-b22002.csv").csv({typed: true})
 
 console.log(typeof singleFemalePercFunc);
 
@@ -88,6 +90,8 @@ function launchSnapCount(data, {width} = {}) {
   </div>
 </div>
 
+## Income
+
 <!-- IncomeFunc -->
 ```js
 let cleanedWCIncomes = cleanAreaFunc(wcMedianIncomes)
@@ -131,7 +135,9 @@ function launchWCIncomes(data, {width} = {}) {
     ${resize((width) => launchWCIncomes(cleanedWCIncomes, {width}))}
   </div>
 </div>
- 
+
+ ## Household Types
+
 <!-- children household func -->
 ```js
 let childrenPerc = snapChildrenPercFunc(snapChildren)
@@ -229,6 +235,7 @@ let centroids = countyGeoJSON.features.map(f => {
 
 function spatialChildren(data, {width}){
   return Plot.plot({
+    title: "Percentage of Households w/ Children Receiving SNAP",
   width: 1200,
   height: 800,
   projection,
@@ -237,6 +244,7 @@ function spatialChildren(data, {width}){
     scheme: "blues",
     domain: [0, 25],
     legend: true,
+    label: "Percentage",
   },
   marks: [
     Plot.geo(countyGeoJSON,{
@@ -260,33 +268,18 @@ function spatialChildren(data, {width}){
 ```js
 let singleFemalePerc = singleFemalePercFunc(snapChildrenMap)
 
-// countyGeoJSON.features.map(f => {
-//   let areaName = f.properties.NAME;
-//   f.properties.singleFemalePerc = areaPercSingleFemale.get(areaName)
-// })
-// let projection = d3.geoMercator().fitSize([1200, 800], countyGeoJSON)
-// let path = d3.geoPath(projection)
-// let centroids = countyGeoJSON.features.map(f => {
-//   let [lon, lat] = d3.geoCentroid(f);
-//   return {lon, lat, name: f.properties.NAME};
-// })
-
-// Build a lookup map from the percentage array
 let areaPercSingleFemale = new Map(
   singleFemalePerc.map(d => [d.area, d.percSnapSingleFemale])
 );
 
-// Attach the percentage to each GeoJSON feature
 countyGeoJSON.features.forEach(f => {
   let areaName = f.properties.NAME;
   f.properties.singleFemalePerc = areaPercSingleFemale.get(areaName);
 });
 
-// Define projection and path
 let projection = d3.geoMercator().fitSize([1200, 800], countyGeoJSON);
 let path = d3.geoPath(projection);
 
-// Compute centroids for labels
 let centroids = countyGeoJSON.features.map(f => {
   let [lon, lat] = d3.geoCentroid(f);
   return { lon, lat, name: f.properties.NAME };
@@ -295,6 +288,7 @@ let centroids = countyGeoJSON.features.map(f => {
 
 function spatialSingleFemale(data, {width}){
   return Plot.plot({
+    title: "Percentage of Single Female Households (w/ Children) Receiving SNAP",
   width: 1200,
   height: 800,
   projection,
@@ -303,6 +297,7 @@ function spatialSingleFemale(data, {width}){
     scheme: "blues",
     domain: [0, 55],
     legend: true,
+    label: "Percentage",
   },
   marks: [
     Plot.geo(countyGeoJSON,{
@@ -336,5 +331,141 @@ function spatialSingleFemale(data, {width}){
   <div class = "card">${resize((width) => spatialSingleFemale(countyGeoJSON, {width}))}
   </div>
 </div>
+
+```js
+let wcHouseYearsMap = houseMapYearFunc(wcHouseYears)
+let singleMotherData = singleMotherFunc(wcHouseYearsMap)
+
+let regression = regressionLinear()
+  .x(d => d.year)
+  .y(d => d.perc)
+
+let regLine = regression(singleMotherData)
+
+
+function launchHouseholdYears(data, {width} = {}) {
+(singleMotherData)
+  return Plot.plot({
+  title: "Percentage of SNAP Households that were Single Female w/ Children",
+  style: {
+    fontSize: "18px",       // increases overall font size
+    fontFamily: "sans-serif",
+    fontWeight: "bold"
+  },
+  width: 1500,
+  height: 500,
+  marginLeft: 60,
+  marginBottom: 60,
+  y: {
+    grid: true,
+    label: "% of Households",
+    },
+  x: {
+    label: "Year",
+    tickPadding: 5,
+    domain: d3.range(2015, 2024), // explicit integer years
+    tickFormat: d3.format("d"),   // format without commas/decimals
+  },
+  color: {
+    scheme: "spectral",
+    legend: true,
+  },
+  marks: [
+    Plot.line(singleMotherData,
+      {
+        x:"year",
+        y:"perc",
+        stroke: "area",
+        strokeWidth: 3,
+        tip:true
+      },
+    ),
+      // Regression line (county-wide trend)
+    Plot.line(regLine, {
+      x: d => d[0],
+      y: d => d[1],
+      stroke: "white",
+      strokeDasharray: "4,2",
+      strokeWidth: 5,
+      tip: true,
+      title: d => "Wake County Avg",
+    }),
+    Plot.ruleY([0]),
+  ]
+})
+}
+```
+```js
+let singleMotherCompData = singleMotherCompFunc(wcHouseYearsMap)
+
+let regression = regressionLinear()
+  .x(d => d.year)
+  .y(d => d.perc)
+
+let regLine = regression(singleMotherCompData)
+
+
+function launchCompHouseholdYears(data, {width} = {}) {
+(singleMotherCompData)
+  return Plot.plot({
+  title: "Percentage of  Single Female w/ Children Households that Received SNAP",
+  style: {
+    fontSize: "18px",       // increases overall font size
+    fontFamily: "sans-serif",
+    fontWeight: "bold"
+  },
+  width: 1500,
+  height: 500,
+  marginLeft: 60,
+  marginBottom: 60,
+  y: {
+    grid: true,
+    label: "% of Households",
+    },
+  x: {
+    label: "Year",
+    tickPadding: 5,
+    domain: d3.range(2015, 2024), // explicit integer years
+    tickFormat: d3.format("d"),   // format without commas/decimals
+  },
+  color: {
+    scheme: "spectral",
+    legend: true,
+  },
+  marks: [
+    Plot.line(singleMotherCompData,
+      {
+        x:"year",
+        y:"perc",
+        stroke: "area",
+        strokeWidth: 3,
+        tip:true
+      },
+    ),
+      // Regression line (county-wide trend)
+    Plot.line(regLine, {
+      x: d => d[0],
+      y: d => d[1],
+      stroke: "white",
+      strokeDasharray: "4,2",
+      strokeWidth: 5,
+      tip: true,
+      title: d => "Wake County Avg",
+    }),
+    Plot.ruleY([0]),
+  ]
+})
+}
+```
+<!-- div skeleton -->
+<div class="grid grid-cols-1">
+  <div class="card">
+    ${resize((width) => launchHouseholdYears(singleMotherData, {width}))}
+  </div>
+  <div class="card">
+    ${resize((width) => launchCompHouseholdYears(singleMotherData, {width}))}
+  </div>
+</div>
+
 
 Data: Jonathan C. McDowell, [General Catalog of Artificial Space Objects](https://planet4589.org/space/gcat)

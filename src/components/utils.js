@@ -105,3 +105,99 @@ export const singleFemalePercFunc = (data) => data.map(area => ({
     percSnapSingleFemale: (area.snap.withChildren.singleMother/(area.snap.withChildren.singleMother + area.nonSnap.withChildren.singleMother))*100,
     //percSnapNoChildren: (area.snapNoChildren/area.snapHousehold)*100,
 }))
+
+//temporal remap
+//2. remap labels
+export const houseMapYearFunc = (data) => data.map(d => ({
+  year: d.year,
+  //each object contains data for area & population
+  area: d.area,
+  population: d.population,
+  //Then there are two objects to select, snap households and non snap households
+  snap: {
+    //total # of households with snap
+    totalHouseholds: d.snapHousehold,
+    //Two more objects inside of the snap group: houses with kids (withChildren) and houses without kids (withoutChildren).
+    withChildren: {
+      //each of these final object has the total # of houses and counts of the the types of families
+      total: d.snapHouseholdWithChildren,
+      married: d.snapMarriedWithChildren,
+      singleFather: d.snapSingleFather,
+      singleMother: d.snapSingleMother,
+      nonFamilyHouseholds: d.snapNonFamily,
+    },
+    withoutChildren: {
+      total: d.snapNoChildren,
+      married: d.snapMarriedNoChildren,
+      singleMale: d.snapSingleMale,
+      singleFemale: d.snapSingleFemale,
+      nonFamilyHouseholds: d.snapNonFamilyNoChildren,
+    },
+  },
+  //the pattern is repeated here with non-snap households
+  nonSnap: {
+    totalHouseholds: d.nonSnapHousehold,
+    withChildren: {
+      total: d.nonSnapHouseholdWithChildren,
+      married: d.nonSnapMarriedWithChildren,
+      singleFather: d.nonSnapSingleFather,
+      singleMother: d.nonSnapSingleMother,
+      nonFamilyHouseholds: d.nonSnapNonFamily,
+    },
+    withoutChildren: {
+      total: d.nonSnapNoChildren,
+      married: d.nonSnapMarriedNoChildren,
+      singleMale: d.nonSnapSingleMale,
+      singleFemale: d.nonSnapSingleFemale,
+      nonFamilyHouseholds: d.nonSnapNonFamilyNoChildren,
+    },
+  },
+}))
+
+
+
+
+//temporal household flat map
+export const singleMotherFunc = (data) => data.map(d => ({
+  year: d.year,
+  area: d.area,
+  type: "Single Mother",
+  count: d.snap.withChildren.singleMother,
+  perc: d.snap.withChildren.singleMother / d.snap.totalHouseholds * 100
+}))
+
+export const singleMotherCompFunc = (data) => data.map(d => ({
+  year: d.year,
+  area: d.area,
+  type: "Single Mother",
+  count: d.snap.withChildren.singleMother,
+  perc: (d.snap.withChildren.singleMother/(d.snap.withChildren.singleMother + d.nonSnap.withChildren.singleMother))*100,
+}))
+
+//temporal perc func
+// export const stackedHousePercFunc = (data) => data.flatMap(d => [
+//   {
+//     year: d.year,
+//     area: d.area,
+//     type: "Single Female",
+//     perc: d.snap.withChildren.singleMother / d.snap.totalHouseholds * 100
+//   },
+//   {
+//     year: d.year,
+//     area: d.area,
+//     type: "Single Male",
+//     perc: d.snap.withChildren.singleFather / d.snap.totalHouseholds * 100
+//   },
+//   {
+//     year: d.year,
+//     area: d.area,
+//     type: "Married With Children",
+//     perc: d.snap.withChildren.married / d.snap.totalHouseholds * 100
+//   },
+//   {
+//     year: d.year,
+//     area: d.area,
+//     type: "Non-Family With Children",
+//     perc: d.snap.withChildren.nonFamilyHouseholds / d.snap.totalHouseholds * 100
+//   }
+// ])
