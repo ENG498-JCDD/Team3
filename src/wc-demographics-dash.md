@@ -1,7 +1,8 @@
 ```js
-import {parseYear,snapYearFunc, snapCountsFunc, cleanAreaFunc, householdMappingFunc, snapChildrenPercFunc, stackedChildrenData, singleFemaleFunc, singleFemalePercFunc, stackedHouseFunc, houseMapYearFunc, stackedHousePercFunc, singleMotherFunc, singleMotherCompFunc} from "./components/utils.js";
+import {parseYear,snapYearFunc, snapCountsFunc, cleanAreaFunc, householdMappingFunc, snapChildrenPercFunc, stackedChildrenData, singleFemaleFunc, singleFemalePercFunc, stackedHouseFunc, houseMapYearFunc, stackedHousePercFunc, singleMotherFunc, singleMotherCompFunc, disabilityCountFunc, disabilityMapFunc, onlyDisabledIndivFunc} from "./components/utils.js";
 import * as d3 from "d3";
 import {regressionLinear, regressionPolynomial} from "npm:d3-regression"
+import {InternMap,rollup,} from "d3-array";
 ```
 # Wake County SNAP Demographics
 
@@ -14,9 +15,7 @@ let wcMedianIncomes = FileAttachment("./data/census-2023/wc-median-household-inc
 let snapChildren = FileAttachment("./data/census-2023/wc-snap-households-with-children.csv").csv({typed: true})
 let countyGeoJSON = FileAttachment("./data/wc-geo/Townships.geojson").json()
 let wcHouseYears = FileAttachment("./data/wc-snap-count/acs-b22002.csv").csv({typed: true})
-
-console.log(typeof singleFemalePercFunc);
-
+let snapDisabilities = FileAttachment("./data/census-2023/wc-snap-disability.csv").csv({typed: true})
 ```
 
 <!-- Cards with big numbers -->
@@ -131,6 +130,7 @@ function launchWCIncomes(data, {width} = {}) {
 })
 }
 ```
+
 <!-- Plot of Incomes -->
 <div class="grid grid-cols-1">
   <div class="card">
@@ -143,8 +143,7 @@ The majority of SNAP Households in Wake County fall beneath the poverty line wit
 
 ***Note***: Bartons Creek, Buckhorn, and White Oak did not have any SNAP households in 2024.
 
-
- ## Household Types (based on presence of children)
+## Household Types (based on presence of children)
 
 <!-- children household func -->
 ```js
@@ -482,6 +481,212 @@ function launchCompHouseholdYears(data, {width} = {}) {
 
 Overall the percentage SNAP households with a female householder and children has remained steady over the past decade. The same is true when comparing SNAP and non-SNAP single women with children. Although each township shows individual variability over the years, the Wake County avg has remained the same.
 
+## Disability Status
+
+```js
+let snapDisCount = disabilityCountFunc(snapDisabilities)
+let snapDisMap = disabilityMapFunc(snapDisCount)
+let onlyDisabledIndiv = onlyDisabledIndivFunc(snapDisCount)
+
+function launchDisCounts(data, {width} = {}) {
+(snapDisMap)
+  return Plot.plot({
+  title: "SNAP Benefits Recipients: Households based on Disability Status",
+  marginLeft:150,
+  width: 1000,
+  height: 700,
+  x: {
+    grid: true,
+    label: "# of Households"
+  },
+  y: {
+    grid: true,
+    label: "Township",
+  },
+  color: {
+    legend: true,
+    scheme: "Observable10"
+  },
+  marks: [
+    Plot.barX(snapDisMap,
+      {
+        y:"area",
+        x:"count",
+        fill: "type",
+        tip:true
+      }
+    ),
+    Plot.ruleY([0]),
+  ]
+})
+}
+
+function launchOnlyDisCounts(data, {width} = {}) {
+(onlyDisabledIndiv)
+  return Plot.plot({
+  title: "Households with 1 or More Disabled Individuals",
+  marginLeft:150,
+  width: 1000,
+  height: 700,
+  x: {
+    grid: true,
+    label: "# of Households",
+    color: "Red",
+  },
+  y: {
+    grid: true,
+    label: "Township",
+  },
+  color: {
+    legend: true, // Show the color legend
+    //scheme: "Set1" // Optional color scheme
+  },
+  marks: [
+    Plot.barX(onlyDisabledIndiv,
+      {
+        y:"area",
+        x:"count",
+        fill: "type",
+        tip:true
+      }
+    ),
+    Plot.ruleY([0]),
+  ]
+})}
+```
+
+<!-- MAPS -->
+```js
+let snapDisCount = disabilityCountFunc(snapDisabilities)
+
+let areaPercSnapWithDis = new Map(
+  snapDisCount.map(d => [d.area, d.percSnapWithDis])
+);
+
+countyGeoJSON.features.forEach(f => {
+  let areaName = f.properties.NAME;
+  let match = snapDisCount.find(d => d.area === areaName);
+  if (match) {
+    f.properties.percSnapWithDis = match.percSnapWithDis;
+  }
+});
+
+let projection = d3.geoMercator().fitSize([1200, 800], countyGeoJSON);
+let path = d3.geoPath(projection);
+
+let centroids = countyGeoJSON.features.map(f => {
+  let [lon, lat] = d3.geoCentroid(f);
+  return { lon, lat, name: f.properties.NAME };
+});
+console.log(countyGeoJSON.features[2].properties);
+
+function spatialSnapWithDis(data, {width}){
+  return Plot.plot({
+    title: "Percentage of SNAP Households with 1+ Disabled Individual",
+  width: 1200,
+  height: 800,
+  projection,
+  color: {
+    type: "linear",
+    scheme: "blues",
+    domain: [0, 85],
+    legend: true,
+    label: "Percentage",
+    ticks: 5,
+  },
+  marks: [
+    Plot.geo(countyGeoJSON,{
+      stroke: "gray",
+      fill: d => d.properties.percSnapWithDis,
+      tip: true
+    }),
+    Plot.text(centroids, {
+      x: "lon",
+      y: "lat",
+      text: "name",
+      fill: "white",
+      fontSize: 18,
+      textAnchor: "middle",
+      stroke: "black",
+      strokeWidth: 2
+    })
+  ]
+})}
+```
+
+```js
+let wcDisPerc = disabilityCountFunc(snapDisabilities)
+console.log(wcDisPerc)
+
+let areaPercDisOnSnap = new Map(
+  wcDisPerc.map(d => [d.area, d.percDisOnSnap])
+);
+
+countyGeoJSON.features.forEach(f => {
+  let areaName = f.properties.NAME;
+  let match = wcDisPerc.find(d => d.area === areaName);
+  if (match) {
+    f.properties.percDisOnSnap = match.percDisOnSnap;
+  }
+});
+
+let projection = d3.geoMercator().fitSize([1200, 800], countyGeoJSON);
+let path = d3.geoPath(projection);
+
+let centroids = countyGeoJSON.features.map(f => {
+  let [lon, lat] = d3.geoCentroid(f);
+  return { lon, lat, name: f.properties.NAME };
+});
+console.log(countyGeoJSON.features[2].properties);
+
+function spatialDisonSnap (data, {width}){
+  return Plot.plot({
+    title: "Percentage of Households with 1+ Disabled Individual Receiving SNAP",
+  width: 1200,
+  height: 800,
+  projection,
+  color: {
+    type: "linear",
+    scheme: "blues",
+    domain: [0, 30],
+    legend: true,
+    label: "Percentage",
+    ticks: 5,
+  },
+  marks: [
+    Plot.geo(countyGeoJSON,{
+      stroke: "gray",
+      fill: d => d.properties.percDisOnSnap,
+      tip: true
+    }),
+    Plot.text(centroids, {
+      x: "lon",
+      y: "lat",
+      text: "name",
+      fill: "white",
+      fontSize: 18,
+      textAnchor: "middle",
+      stroke: "black",
+      strokeWidth: 2
+    })
+  ]
+})}
+```
+
+<div class="grid grid-cols-2">
+  <div class="card">
+    ${resize((width) => launchDisCounts(snapDisMap, {width}))}
+  </div>
+   <div class="card">
+    ${resize((width) => spatialSnapWithDis(countyGeoJSON, {width}))}
+  </div>
+  <div class="card">
+    ${resize((width) => launchOnlyDisCounts(snapDisMap, {width}))}
+  </div>
+  <div class="card">
+    ${resize((width) => spatialDisonSnap(countyGeoJSON, {width}))}
+  </div>
+</div>
 
 ### Data & Resources
 

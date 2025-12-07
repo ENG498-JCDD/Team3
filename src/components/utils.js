@@ -174,30 +174,42 @@ export const singleMotherCompFunc = (data) => data.map(d => ({
   perc: (d.snap.withChildren.singleMother/(d.snap.withChildren.singleMother + d.nonSnap.withChildren.singleMother))*100,
 }))
 
-//temporal perc func
-// export const stackedHousePercFunc = (data) => data.flatMap(d => [
-//   {
-//     year: d.year,
-//     area: d.area,
-//     type: "Single Female",
-//     perc: d.snap.withChildren.singleMother / d.snap.totalHouseholds * 100
-//   },
-//   {
-//     year: d.year,
-//     area: d.area,
-//     type: "Single Male",
-//     perc: d.snap.withChildren.singleFather / d.snap.totalHouseholds * 100
-//   },
-//   {
-//     year: d.year,
-//     area: d.area,
-//     type: "Married With Children",
-//     perc: d.snap.withChildren.married / d.snap.totalHouseholds * 100
-//   },
-//   {
-//     year: d.year,
-//     area: d.area,
-//     type: "Non-Family With Children",
-//     perc: d.snap.withChildren.nonFamilyHouseholds / d.snap.totalHouseholds * 100
-//   }
-// ])
+//DISABILITY STATUS FUNCTIONS
+
+//1. diability mapping
+export const disabilityCountFunc = (data) => data.map(d => ({
+  area: d.area,
+  population: d.totalHouseholds,
+  snap: {
+    totalHouseholds: d.householdReceivedSNAPInPast12Months,
+    disabledIndividualInHousehold: d.householdWithOneOrMorePersonsWithADisabilitySnap,noDisabledIndividuals: d.householdsWithNoPersonsWithADisabilitySnap,
+    },
+  nonSnap: {
+    totalHouseholds: d.householdsDidNotReceiveSNAPInPast12Months,disabledIndividualInHousehold: d.householdsWithOneOrMorePersonsWithADisabilityNoSnap,noDisabledIndividuals: d.householdsWithNoPersonsWithADisabilityNoSnap,
+  },
+  percSnapWithDis: (d.householdWithOneOrMorePersonsWithADisabilitySnap/d.householdReceivedSNAPInPast12Months)*100,
+  percDisOnSnap: (d.householdWithOneOrMorePersonsWithADisabilitySnap/(d.householdWithOneOrMorePersonsWithADisabilitySnap + d.householdsWithOneOrMorePersonsWithADisabilityNoSnap))*100,
+}))
+    
+//2. diability status flat map
+export const disabilityMapFunc = (data) => data.flatMap(d => [
+  {area: d.area, type: "SNAP: Disabled Individual in Household", count: d.snap.disabledIndividualInHousehold},
+  {area: d.area, type: "SNAP: No Disabled Individuals in Household", count: d.snap.noDisabledIndividuals},
+  {area: d.area, type: "non-SNAP: Disabled Individual in Household", count: d.nonSnap.disabledIndividualInHousehold},
+  //{area: d.area, type: "non-SNAP: No Disable Individuals in Household", count: d.nonSnap.noDisabledIndividuals},
+])
+
+//only disabled indiv
+export const onlyDisabledIndivFunc = (data) => data.flatMap(d => [
+  {area: d.area, type: "SNAP: Disabled Individual in Household", count: d.snap.disabledIndividualInHousehold},
+  // {area: d.area, type: "SNAP: No Disable Individuals in Household", count: d.snap.noDisabledIndividuals},
+  {area: d.area, type: "non-SNAP: Disabled Individual in Household", count: d.nonSnap.disabledIndividualInHousehold},
+  // {area: d.area, type: "non-SNAP: No Disable Individuals in Household", count: d.nonSnap.noDisabledIndividuals},
+])
+
+// disability percentages
+// export const snapDisPercFunc = (data) => data.map(area => ({
+//   ...area,
+//     percsnapDis: (area.snapHouseholdWithChildren/(area.snapHouseholdWithChildren + area.nonSnapHouseholdWithChildren))*100,
+//     //perDis: (area.snapNoChildren/area.snapHousehold)*100,
+// }))
