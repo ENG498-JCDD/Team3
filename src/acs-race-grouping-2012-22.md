@@ -272,20 +272,3 @@ let wc2023SnapByRace = groupedByRaceFunc(wc2023Snap);
 //2023 SNAP Recipients by Race
 //wc2023SnapByRace
 ```
-
-```js
-/*
-const byGenderAndAge = twoLevelRollUpFlatMap(
-  wc2022SnapByRaceArray,
-  "AGE",
-  "SEX",
-  "af"
-)
-*/
-```
-
-```js
-/*
-byGenderAndAge
-*/
-```
