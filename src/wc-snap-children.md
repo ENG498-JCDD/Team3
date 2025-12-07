@@ -234,3 +234,13 @@ Plot.plot({
 //console.log(countyGeoJSON.features.properties)
 
 ```
+```js
+let houseIncome = FileAttachment("./data/census-2023/wc-median-income-household-type.csv").csv({typed: true})
+console.log(houseIncome.femaleHouseholderWithKids)
+
+let houseIncomeReduced = d3.group(houseIncome,
+  (d) => d.area);
+```
+```js
+houseIncomeReduced
+```
