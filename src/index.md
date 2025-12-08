@@ -2,7 +2,7 @@
 
 ## Exigence
 
-Our current presidential administration (and the recent government shutdown) have reduced support/funding for SNAP benefits nationally. This has led many families across the country to experience higher levels of food insecurity. Trump's "Big Beautiful Bill" makes it harder for people to meet the requirements for SNAP benefits, and has brought billions of dollars in cuts to the SNAP program. (The current government shutdown is also impacting SNAP; without a budget, the government will not be able to disperse SNAP benefits to those who need them -- DO WE STILL NEED THIS PART?)
+Our current presidential administration (and the recent government shutdown) have reduced support/funding for SNAP benefits nationally. This has led many families across the country to experience higher levels of food insecurity. Trump's "Big Beautiful Bill" makes it harder for people to meet the requirements for SNAP benefits, and has brought billions of dollars in cuts to the SNAP program. (The current government shutdown is also impacting SNAP; without a budget, the government will not be able to disperse SNAP benefits to those who need them -- change to past tense, allude to possible future shutdown issues)
 
 ## Hypothesis
 
@@ -37,6 +37,8 @@ You are a policymaker trying to understand who receives SNAP benefits in Wake Co
 
 Include datasets used here, info about cleaning/processing labor, etc.
 (Principle 7: Make labor visible - sj ethic)
+
+Was difficult to collect data b/c data from the Census website due to the shutdown; also Census website tools are hard to use, inconvenient, not user friendly
 
 Principle 6: Consider context
 
