@@ -426,12 +426,14 @@ function launchCompHouseholdYears(data, {width} = {}) {
     fontWeight: "bold"
   },
   width: 1500,
-  height: 500,
+  height: 600,
   marginLeft: 60,
   marginBottom: 60,
+  marginTop: 50,
   y: {
     grid: true,
     label: "% of Households",
+    labelAnchor: "top",
     },
   x: {
     label: "Year",
@@ -479,7 +481,7 @@ function launchCompHouseholdYears(data, {width} = {}) {
   </div>
 </div>
 
-Overall the percentage SNAP households with a female householder and children has remained steady over the past decade. The same is true when comparing SNAP and non-SNAP single women with children. Although each township shows individual variability over the years, the Wake County avg has remained the same.
+Overall the percentage SNAP households with a female householder and children has remained steady over the past decade. The same is true when comparing SNAP and non-SNAP single women with children. Although each township shows individual variability over the years, the Wake County avg has slightly decreased over the past decade.
 
 ## Disability Status
 
@@ -680,6 +682,12 @@ function spatialDisonSnap (data, {width}){
    <div class="card">
     ${resize((width) => spatialSnapWithDis(countyGeoJSON, {width}))}
   </div>
+</div>
+
+About half of all households that receive SNAP benefits have at least 1 individual with a disability. Approximately 8.6% of the Wake County population has a disability. A large portion of these individuals are unemployed and may not be able to work because of their disability. Disability come in many forms, from physical disabilities impacting mobility, vision, or hearing, developmental disabilities, and mental health conditions. Most workplaces and public services are not prepared to accomodate different disabilities making it harder for these individuals to find and keep work (or simply navigate to work). Potential SNAP cuts may prevent these residents (who have increased employment limitations) from receiving necessary supplemental income for food
+
+
+<div class="grid grid-cols-2">
   <div class="card">
     ${resize((width) => launchOnlyDisCounts(snapDisMap, {width}))}
   </div>

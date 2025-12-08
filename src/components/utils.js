@@ -195,7 +195,7 @@ export const disabilityCountFunc = (data) => data.map(d => ({
 export const disabilityMapFunc = (data) => data.flatMap(d => [
   {area: d.area, type: "SNAP: Disabled Individual in Household", count: d.snap.disabledIndividualInHousehold},
   {area: d.area, type: "SNAP: No Disabled Individuals in Household", count: d.snap.noDisabledIndividuals},
-  {area: d.area, type: "non-SNAP: Disabled Individual in Household", count: d.nonSnap.disabledIndividualInHousehold},
+  //{area: d.area, type: "non-SNAP: Disabled Individual in Household", count: d.nonSnap.disabledIndividualInHousehold},
   //{area: d.area, type: "non-SNAP: No Disable Individuals in Household", count: d.nonSnap.noDisabledIndividuals},
 ])
 
