@@ -4,7 +4,7 @@ title: Group 3's Data Design Page
 
 # Exploring the Data Design of our Project on SNAP Benefits 
 
-This page covers our project's data design - the types of data we found and chose to use, the concepts they reflect from our class readings on social justice within TPC, the benefits and limitations of our data (as well as how these limitations could be addressed with additional data), and the next steps we envision the field of TPC to take in furthering the research we've done through this project.  
+This page covers our project's data design, including the types of data we found and chose to use, the concepts they reflect from our class readings on social justice within TPC, the benefits and limitations of our data (as well as how these limitations could be addressed with additional data), and the next steps we envision the field of TPC to take in furthering the research we've done through this project.  
 
 ## Assessing the Data We Used
 
@@ -12,7 +12,7 @@ There were three main types of Wake County data our team looked for when beginni
 
 ## Applying Concepts from the Readings
 
-There are several concepts from the class readings that can be applied to our findings to consider what our data does and doesn't feature, including the structuralist perspective, collectivization, and materialization. 
+There are several concepts from the class readings that can be applied to our findings to analyze what our data does and doesn't feature, including the structuralist perspective, collectivization, and materialization. 
 
 ### The Structuralist Perspective 
 
