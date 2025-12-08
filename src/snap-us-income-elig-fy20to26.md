@@ -1,6 +1,6 @@
-# Graphing USDA and NCDHHS Data
+# SQ3: Are SNAP benefits becoming harder to access?
 
-## National SNAP Income Eligibility and Benefits Distribution Data from the United States Department of Agriculture (USDA), and North Carolina SNAP/Food and Nutrition Services Applications Data from the NC Department of Health and Human Services (NCDHHS)
+**National SNAP Income Eligibility and Benefits Distribution Data from the United States Department of Agriculture (USDA), and North Carolina SNAP/Food and Nutrition Services Applications Data from the NC Department of Health and Human Services (NCDHHS)**
 
 ```js
 //Attached datasets I want to work with
@@ -25,8 +25,7 @@ const incomeArray = incomeEligibilityDatasets.flatMap(([recipient, rows]) =>
   rows.map(row => ({ recipient, ...row }))
 );
 ```
-|
-FY 2020-2026 SNAP Gross Monthly Income Limits for Household of 4 (in Contiguous United States/D.C./Guam/Virgin Islands, Alaska, and Hawaii)
+## FY 2020-2026 SNAP Gross Monthly Income Limits for Household of 4 (in Contiguous United States/D.C./Guam/Virgin Islands, Alaska, and Hawaii)
 ```js
   //Rendered line graph
 Plot.plot({
@@ -47,8 +46,25 @@ Plot.plot({
 })
 ```
 
-|
-FY 1969-2024 SNAP Benefits Per Person in Dollars (National)
+  <div class="note">
+    <p>
+      The graph above charts annual changes in the monthly gross income limit (to qualify for SNAP benefits) for a 4-person household over six consecutive fiscal years (October 1, 2019 to September 30, 2026).
+    </p>
+    <p>
+      The monthly gross income limit is 130% of the poverty level.
+    </p>
+    <p>
+    The graph illustrates that <b>eligibility limits have increased very little (an average of $115.50 per fiscal year) over the past several years</b>, despite the elevated cost of living.
+    <ul>
+      <li>
+      In 2025, a family of four would need an annual gross income of $111,040 (or $9,250 per month) to live comfortably and cover their basic needs in Wake County (<i>NC Budget and Tax Center 2025 Living Income Standard Report</i>).
+      </li>
+    </ul>
+    </p>
+  </div>
+
+
+## FY 1969-2024 SNAP Average Monthly Benefits Per Person in Dollars (National)
 ```js
 Plot.plot({
   x: {
@@ -68,8 +84,13 @@ Plot.plot({
 })
 ```
 
-|
-SNAP/FNS Applications Received in North Carolina, 2019-2025 (in Thousands)
+  <div class="note">
+    <p>
+    </p>
+  </div>
+
+
+## SNAP/FNS Applications Received in North Carolina, 2019-2025 (in Thousands)
 ```js
 Plot.plot({
   y: {
@@ -83,3 +104,7 @@ Plot.plot({
 })
 ```
 
+  <div class="note">
+    <p>
+    </p>
+  </div>
