@@ -26,13 +26,13 @@ const incomeArray = incomeEligibilityDatasets.flatMap(([recipient, rows]) =>
 );
 ```
 |
-FY 2020-2026 SNAP Income Limits for Household of 3 (Contiguous United States/D.C./Guam/Virgin Islands, Alaska, Hawaii)
+FY 2020-2026 SNAP Gross Monthly Income Limits for Household of 4 (in Contiguous United States/D.C./Guam/Virgin Islands, Alaska, and Hawaii)
 ```js
   //Rendered line graph
 Plot.plot({
   //added grid, axis labels, domain limits for y-axis
   x: {grid: true, label: "Fiscal Year"},
-  y: {grid: true, domain: [2000, 4000], label: "Income Limit (Dollars)"},
+  y: {grid: true, domain: [2400, 4600], label: "Income Limit (Dollars)"},
   marks: [
     //added legend, pointer rule mark, tooltip to display details when hovering over data point
     Plot.ruleY([0]),
