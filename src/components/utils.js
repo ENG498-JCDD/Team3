@@ -21,7 +21,6 @@ export const snapCountsFunc = (data) => [
 ]
 
 //Remove extra area information
-
 export const cleanAreaFunc = (data) => data.map(d => ({
   ...d,
   area: d.area.slice(0,-26)
@@ -154,9 +153,6 @@ export const houseMapYearFunc = (data) => data.map(d => ({
   },
 }))
 
-
-
-
 //temporal household flat map
 export const singleMotherFunc = (data) => data.map(d => ({
   year: d.year,
@@ -207,9 +203,36 @@ export const onlyDisabledIndivFunc = (data) => data.flatMap(d => [
   // {area: d.area, type: "non-SNAP: No Disable Individuals in Household", count: d.nonSnap.noDisabledIndividuals},
 ])
 
-// disability percentages
-// export const snapDisPercFunc = (data) => data.map(area => ({
-//   ...area,
-//     percsnapDis: (area.snapHouseholdWithChildren/(area.snapHouseholdWithChildren + area.nonSnapHouseholdWithChildren))*100,
-//     //perDis: (area.snapNoChildren/area.snapHousehold)*100,
-// }))
+//AGE OVER 60 FUNCTIONS
+
+//1.over 60 mapping
+export const over60MapFunc = (data) => data.map(d => ({
+  area: d.area,
+  population: d.population,
+  snap: {
+    totalHouseholds: d.snapHousehold,
+    over60: d.snapOneOver60,
+    noOver60: d.snapNoOver60,
+    },
+  nonSnap: {
+    totalHouseholds: d.nonSnapHousehold,
+    memberOver60: d.nonSnapOneOver60,
+    noMemberOver60: d.nonSnapNoOver60,
+  },
+  percSnapOver60: (d.snapOneOver60/d.snapHousehold)*100,
+  percOver60OnSnap: (d.snapOneOver60/(d.snapOneOver60 + d.nonSnapOneOver60))*100,
+}))
+
+//2. over 60 flat map
+export const over60SnapFlatMapFunc = (data) => data.flatMap(d => [
+  {area: d.area, type: "SNAP: Individual Over 60 in Household", count: d.snap.over60},
+  {area: d.area, type: "SNAP: No Individual Over 60 in Household", count: d.snap.noOver60},
+  //{area: d.area, type: "non-SNAP: Individual Over 60 in Household", count: d.nonSnap.memberOver60},
+  //{area: d.area, type: "non-SNAP: No Individual Over 60 in Household", count: d.nonSnap.noMemberOver60},
+])
+export const over60OnlyFlatMapFunc = (data) => data.flatMap(d => [
+  //{area: d.area, type: "SNAP: Individual Over 60 in Household", count: d.snap.over60},
+  {area: d.area, type: "SNAP: No Individual Over 60 in Household", count: d.snap.noOver60},
+  {area: d.area, type: "non-SNAP: Individual Over 60 in Household", count: d.nonSnap.memberOver60},
+  //{area: d.area, type: "non-SNAP: No Individual Over 60 in Household", count: d.nonSnap.noMemberOver60},
+])

@@ -36,7 +36,7 @@ let over60HouseholdsArray = Array.from(over60Households)
 let allOver60Data = over60HouseholdsArray.flatMap(d => [
   {area: d.area, type: "SNAP: Individual Over 60 in Household", count: d.snap.over60},
   {area: d.area, type: "SNAP: No Individual Over 60 in Household", count: d.snap.noOver60},
-  {area: d.area, type: "non-SNAP: Individual Over 60 in Household", count: d.nonSnap.memberover60},
+  {area: d.area, type: "non-SNAP: Individual Over 60 in Household", count: d.nonSnap.memberOver60},
   {area: d.area, type: "non-SNAP: No Individual Over 60 in Household", count: d.nonSnap.noMemberOver60},
 ])
 ```

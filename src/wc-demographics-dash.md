@@ -1,5 +1,5 @@
 ```js
-import {parseYear,snapYearFunc, snapCountsFunc, cleanAreaFunc, householdMappingFunc, snapChildrenPercFunc, stackedChildrenData, singleFemaleFunc, singleFemalePercFunc, stackedHouseFunc, houseMapYearFunc, stackedHousePercFunc, singleMotherFunc, singleMotherCompFunc, disabilityCountFunc, disabilityMapFunc, onlyDisabledIndivFunc} from "./components/utils.js";
+import {parseYear,snapYearFunc, snapCountsFunc, cleanAreaFunc, householdMappingFunc, snapChildrenPercFunc, stackedChildrenData, singleFemaleFunc, singleFemalePercFunc, stackedHouseFunc, houseMapYearFunc, stackedHousePercFunc, singleMotherFunc, singleMotherCompFunc, disabilityCountFunc, disabilityMapFunc, onlyDisabledIndivFunc, over60MapFunc, over60SnapFlatMapFunc, over60OnlyFlatMapFunc } from "./components/utils.js";
 import * as d3 from "d3";
 import {regressionLinear, regressionPolynomial} from "npm:d3-regression"
 import {InternMap,rollup,} from "d3-array";
@@ -16,6 +16,7 @@ let snapChildren = FileAttachment("./data/census-2023/wc-snap-households-with-ch
 let countyGeoJSON = FileAttachment("./data/wc-geo/Townships.geojson").json()
 let wcHouseYears = FileAttachment("./data/wc-snap-count/acs-b22002.csv").csv({typed: true})
 let snapDisabilities = FileAttachment("./data/census-2023/wc-snap-disability.csv").csv({typed: true})
+let snapOver60 = FileAttachment("./data/census-2023/wc-snap-people-over-60-years.csv").csv({typed: true})
 ```
 
 <!-- Cards with big numbers -->
@@ -248,8 +249,8 @@ function spatialChildren(data, {width}){
   projection,
   color: {
     type: "linear",
-    scheme: "blues",
-    domain: [0, 25],
+    scheme: "Turbo",
+    domain: [0, 100],
     legend: true,
     label: "Percentage",
   },
@@ -301,8 +302,8 @@ function spatialSingleFemale(data, {width}){
   projection,
   color: {
     type: "linear",
-    scheme: "blues",
-    domain: [0, 55],
+    scheme: "Turbo",
+    domain: [0, 100],
     legend: true,
     label: "Percentage",
     ticks: 5,
@@ -590,8 +591,8 @@ function spatialSnapWithDis(data, {width}){
   projection,
   color: {
     type: "linear",
-    scheme: "blues",
-    domain: [0, 85],
+    scheme: "Turbo",
+    domain: [0, 100],
     legend: true,
     label: "Percentage",
     ticks: 5,
@@ -649,8 +650,8 @@ function spatialDisonSnap (data, {width}){
   projection,
   color: {
     type: "linear",
-    scheme: "blues",
-    domain: [0, 30],
+    scheme: "Turbo",
+    domain: [0, 100],
     legend: true,
     label: "Percentage",
     ticks: 5,
@@ -696,8 +697,227 @@ About half of all households that receive SNAP benefits have at least 1 individu
   </div>
 </div>
 
-### Data & Resources
+## Individuals Over 60 Years Old
 
-Data: Jonathan C. McDowell, [General Catalog of Artificial Space Objects](https://planet4589.org/space/gcat)
+```js
+let snapOver60Cleaned = cleanAreaFunc(snapOver60)
+let snapOver60Mapped = over60MapFunc(snapOver60Cleaned)
+let snapOver60Final = over60SnapFlatMapFunc(snapOver60Mapped)
+let only60 = over60OnlyFlatMapFunc(snapOver60Mapped)
 
-Resources: Wake County: [Wake County Food Security Program](https://www.wake.gov/departments-government/wake-county-food-security-program)
+function launchOverSixty(data, {width} = {}) {
+(snapOver60Final)
+  return Plot.plot({
+  title: "SNAP Households Based on the Presence of Individuals 60+",
+  marginLeft: 100,
+  width: 1000,
+  height: 700,
+  x: {
+    grid: true,
+    label: "# of Households"
+  },
+  y: {
+    label: "Township",
+  },
+  color: {
+    legend: true, 
+  },
+  marks: [
+    Plot.barX(snapOver60Final,
+      {
+        y:"area",
+        x:"count",
+        fill: "type",
+        tip:true,
+      }
+    ),
+    Plot.ruleY([0]),
+  ]
+})}
+```
+```js
+function launchOnlyOverSixty(data, {width} = {}) {
+(only60)
+return Plot.plot({
+  title: "SNAP Benefits Recipients: Types of Households with Members Over 60",
+  marginLeft: 100,
+  width: 1000,
+  height: 700,
+  x: {
+    grid: true,
+    label: "# of Households"
+  },
+  y: {
+    label: "Township",
+  },
+  color: {
+    legend: true, // Show the color legend
+  },
+  marks: [
+    Plot.barX(only60,
+      {
+        y:"area",
+        x:"count",
+        fill: "type",
+        tip:true
+      }
+    ),
+    Plot.ruleY([0]),
+  ]
+})}
+```
+<!-- over 60 maps -->
+```js
+let areaPercSnapOver60 = new Map(
+  snapOver60Mapped.map(d => [d.area, d.percSnapOver60])
+);
+
+countyGeoJSON.features.forEach(f => {
+let areaName = f.properties.NAME.trim().toLowerCase();
+let match = snapOver60Mapped.find(d => d.area.trim().toLowerCase() === areaName);
+if (match) {
+  f.properties.percSnapOver60 = +match.percSnapOver60; // force numeric
+} else {
+  f.properties.percSnapOver60 = 0; // fallback
+}})
+
+
+let projection = d3.geoMercator().fitSize([1200, 800], countyGeoJSON);
+let path = d3.geoPath(projection);
+
+let centroids = countyGeoJSON.features.map(f => {
+  let [lon, lat] = d3.geoCentroid(f);
+  return { lon, lat, name: f.properties.NAME };
+});
+console.log(countyGeoJSON.features.map(f => f.properties.percSnapOver60));
+
+
+function spatialSnapOverSixty(geojson, {width}) {
+  return Plot.plot({
+    title: "Percentage of SNAP Households with 1+ 60+ Individual",
+    width,
+    height: 800,
+    projection: d3.geoMercator().fitSize([width, 800], geojson),
+    color: {
+      type: "linear",
+      scheme: "Turbo",
+      domain: [0, 100],
+      legend: true,
+      label: "Percentage",
+      ticks: 5,
+    },
+    marks: [
+      Plot.geo(geojson, {
+        stroke: "gray",
+        fill: d => d.properties.percSnapOver60,
+        tip: true
+      }),
+      Plot.text(
+        geojson.features.map(f => {
+          let [lon, lat] = d3.geoCentroid(f);
+          return { lon, lat, name: f.properties.NAME };
+        }),
+        {
+          x: "lon",
+          y: "lat",
+          text: "name",
+          fill: "white",
+          fontSize: 18,
+          textAnchor: "middle",
+          stroke: "black",
+          strokeWidth: 2
+        }
+      )
+    ]
+  });
+}
+```
+```js
+let areapercOver60OnSnap = new Map(
+  snapOver60Mapped.map(d => [d.area, d.percOver60OnSnap])
+);
+
+countyGeoJSON.features.forEach(f => {
+let areaName = f.properties.NAME.trim().toLowerCase();
+let match = snapOver60Mapped.find(d => d.area.trim().toLowerCase() === areaName);
+if (match) {
+  f.properties.percOver60OnSnap = +match.percOver60OnSnap; // force numeric
+} else {
+  f.properties.percOver60OnSnap = 0; // fallback
+}})
+
+
+let projection = d3.geoMercator().fitSize([1200, 800], countyGeoJSON);
+let path = d3.geoPath(projection);
+
+let centroids = countyGeoJSON.features.map(f => {
+  let [lon, lat] = d3.geoCentroid(f);
+  return { lon, lat, name: f.properties.NAME };
+});
+console.log(countyGeoJSON.features.map(f => f.properties.percOver60OnSnap));
+
+
+function spatialOnlyOverSixty(geojson, {width}) {
+  return Plot.plot({
+    title: "Percentage of SNAP Households with 1+ 60+ Individual",
+    width,
+    height: 800,
+    projection: d3.geoMercator().fitSize([width, 800], geojson),
+    color: {
+      type: "linear",
+      scheme: "Turbo",
+      domain: [0, 100],
+      legend: true,
+      label: "Percentage",
+      ticks: 5,
+    },
+    marks: [
+      Plot.geo(geojson, {
+        stroke: "gray",
+        fill: d => d.properties.percOver60OnSnap,
+        tip: true
+      }),
+      Plot.text(
+        geojson.features.map(f => {
+          let [lon, lat] = d3.geoCentroid(f);
+          return { lon, lat, name: f.properties.NAME };
+        }),
+        {
+          x: "lon",
+          y: "lat",
+          text: "name",
+          fill: "white",
+          fontSize: 18,
+          textAnchor: "middle",
+          stroke: "black",
+          strokeWidth: 2
+        }
+      )
+    ]
+  });
+}
+```
+<div class="grid grid-cols-2">
+  <div class="card">
+    ${resize((width) => launchOverSixty(snapOver60Final, {width}))}
+  </div>
+  <div class="card">
+    ${resize((width) => launchOnlyOverSixty(only60, {width}))}
+  </div>
+  <div class="card">
+   ${spatialSnapOverSixty(countyGeoJSON, {width})}
+  </div>
+   <div class="card">
+   ${spatialOnlyOverSixty(countyGeoJSON, {width})}
+  </div>
+</div>
+
+
+## Data & Resources 
+ 
+* Census Reporter: [Public Assistance](https://censusreporter.org/topics/public-assistance/)
+  * *Tables B22001, B22002, B22008, and B22010*
+* [United States Census Bureau](https://data.census.gov/all?q=SNAP/Food+Stamps)
+* Wake County: [Wake County Food Security Program](https://www.wake.gov/departments-government/wake-county-food-security-program)
+* Wake County: [October: National Disability Employment Awareness Month](https://www.commerce.nc.gov/blog/2016/10/26/october-national-disability-employment-awareness-month)
+* Wake County Open Data: [Townships](https://data-wake.opendata.arcgis.com/datasets/748df1a75ee7448e80f6ae646efa1d79_0/explore)
