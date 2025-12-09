@@ -4,7 +4,7 @@
 - Alyssa Johnson
 - Sami Zito
 
-Our project aims to provide compelling evidence of growing food insecurity and the individuals/groups most affected by it, as well as the degree to which SNAP has mitigated food insecurity in Wake County and the greater United States.
+Our project aims to provide compelling evidence of growing food insecurity and the individuals/groups most affected by it, as well as the degree to which the SNAP program has mitigated food insecurity in Wake County and the greater United States.
 
 - [Project Tracker]()
   - **WARNING!**: Be sure to just share the direct URL, since I have added everyone in the class to the Drive folder overall. So, do not provide the "Share" link. We want to make sure the information remains secure.
@@ -14,12 +14,7 @@ Our project aims to provide compelling evidence of growing food insecurity and t
 **`src/data/path/to/dataset.csv`**
 - **Topic**: SNAP Benefits
 - **Overview**: Enter brief description for each dataset.
-  SNAP Cost-of-Living Adjustment (COLA) Information, USDA
-  SNAP Data Tables, USDA
-  Map the Meal Gap Data, Feeding America
-  Census/American Community Survey, US Census Bureau
-  Wake County Food Bank
-- **Source**: [`src/data/path/to/dataset.csv`]()
+- **Source**: [``]()
 - **Sample Row**:
   ```csv
   enter,sample,row,here
@@ -66,6 +61,51 @@ Our project aims to provide compelling evidence of growing food insecurity and t
  ```csv
  2023,Buckhorn,3897,0,0,0,0,0,0,0,0,0,0,0,0,0,3897,2471,2218,253,48,205,0,1426,815,169,94,75,442
  ```
+
+  **`src/data/map-the-meal-gap/MMG2025_2019-2023_Data_To_Share(County).csv`**
+- **Topic**: SNAP/Food Insecurity data by county/state
+- **Overview**: Includes stats on food insecurity and SNAP participation at county and state level during 2019-2023.
+- **Source**: [Map the Meal Gap Data](https://www.feedingamerica.org/research/map-the-meal-gap/overall-executive-summary)
+- **Sample Row**:
+ ```csv
+01001,AL,"Autauga County, Alabama",2019,15.7%,"8,670",26%,,12%,130%,49%,51%,19.6%,"2,590",69%,31%,$3.00,$16.88,"$4,439,000",2,,South,East South Central,Southeast
+```
+
+**`src/data/usda/alaska.csv`**
+- **Topic**: SNAP Income Limits in Alaska
+- **Overview**: Data represents SNAP Income Limits in Alaska from FY2020 to FY2026
+- **Source**: [SNAP Cost-of-Living Adjustment (COLA) Information](https://www.fns.usda.gov/snap/allotment/cola)
+- **Sample Row**:
+  ```csv
+  2020,3488,Alaska
+  ```
+
+**`src/data/usda/contig-states.csv`**
+- **Topic**: SNAP Income Limits in Contiguous States
+- **Overview**: Data represents SNAP Income Limits in Contiguous States from FY2020 to FY2026
+- **Source**: [SNAP Cost-of-Living Adjustment (COLA) Information](https://www.fns.usda.gov/snap/allotment/cola)
+- **Sample Row**:
+  ```csv
+  2020,2790,48 States/DC/Guam/VI
+  ```
+
+**`src/data/usda/hawaii.csv`**
+- **Topic**: SNAP Income Limits in Hawaii
+- **Overview**: Data represents SNAP Income Limits in Hawaii from FY2020 to FY2026
+- **Source**: [SNAP Cost-of-Living Adjustment (COLA) Information](https://www.fns.usda.gov/snap/allotment/cola)
+- **Sample Row**:
+  ```csv
+  2020,3209,Hawaii
+  ```
+
+**`src/data/usda/FY69-24-SNAP-Annual-Avg-Benefits-per-Person.csv`**
+- **Topic**: Average Monthly SNAP Benefits per person
+- **Overview**: Data represents Average Monthly SNAP Benefits per person from FY1969 to FY2024.
+- **Source**: [SNAP Data Tables](https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap)
+- **Sample Row**:
+  ```csv
+  1969,6.63
+  ```
 
 ## About the Data App
 

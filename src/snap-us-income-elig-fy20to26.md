@@ -158,7 +158,7 @@ Plot.plot({
     </p>
   </div>
 
-**From this data, one can conclude that (1) <i>SNAP income eligibility requirements are too strict considering skyrocketing living expenses</i>, (2) <i>there are too few SNAP benefits to go around</i>, and (3) <i>food insecurity in Wake County has not been managed sufficiently by SNAP.</i>**
+**From this data, one can reasonably conclude that (1) <i>SNAP income eligibility requirements are too strict considering skyrocketing living expenses</i>, (2) <i>there are too few SNAP benefits to go around</i>, and (3) <i>food insecurity in Wake County has not been managed sufficiently by SNAP.</i>**
 
 **Data Sources**
 - USDA, [SNAP Cost-of-Living Adjustment (COLA) Information](https://www.fns.usda.gov/snap/allotment/cola)
