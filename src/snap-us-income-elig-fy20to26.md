@@ -1,6 +1,6 @@
 # SQ1: Are SNAP benefits becoming harder to access?
 
-**The following line graphs show how SNAP accessibility has changed over time, both nationally and in Wake County, North Carolina.**
+**The following line graphs show changes in SNAP accessibility over time, both nationally and in Wake County, North Carolina.** 
 
 ```js
 //Attached datasets I want to work with
@@ -57,7 +57,7 @@ Plot.plot({
 
   <div class="note">
     <p>
-      The graph above charts annual changes in the monthly gross income limit (to qualify for SNAP benefits) for a 4-person household over six consecutive fiscal years (October 1, 2019 to September 30, 2026).
+      The graph above charts annual changes in the monthly gross income limit (to qualify for SNAP benefits) for a 4-person household over six consecutive fiscal years (October 1, 2019 to September 30, 2026). [<i>Data from the USDA website.</i>]
     </p>
     <p>
       The monthly gross income limit is 130% of the poverty level.
@@ -81,7 +81,7 @@ Plot.plot({
 Plot.plot({
   x: {
     label: "Fiscal Year",
-    domain: [1969, 2030],
+    domain: [1969, 2030]
   },
   y: {
     label: "Avg. Benefits (Dollars)",
@@ -98,10 +98,10 @@ Plot.plot({
 
   <div class="note">
     <p>
-    The graph above charts annual changes in average monthly SNAP benefits (in dollars) per SNAP participant nationally.
+    The graph above charts annual changes in average monthly SNAP benefits (in dollars) per SNAP participant nationally from FY1969 to FY2024. [<i>Data from the USDA website.</i>]
     </p>
     <p>
-    The graph indicates a fairly steady increase in monthly SNAP benefits from FY1969 (first year of the SNAP program) until about FY2019. <b>Between FY2019 and FY2021, monthly benefits increased by about $85</b> (<i>compare this to the average yearly increase of approximately $2.46 between FY1969 and FY2019</i>).
+    The graph indicates a fairly steady increase in monthly SNAP benefits from FY1969 (first year of the SNAP program) until about FY2019. <b>Between FY2019 and FY2021, monthly benefits increased by about $85</b> (<i>compare this to an average yearly increase of approximately $2.46 between FY1969 and FY2019</i>). 
     </p>
     <ul>
       <li>
@@ -117,7 +117,7 @@ Plot.plot({
   </div>
 
 
-## SNAP/FNS Applications Received in North Carolina, 2019-2025 (in Thousands)
+## [Food Insecure Individuals > SNAP Threshold in North Carolina] vs. [Food Insecure Individuals > SNAP Threshold in Wake County], 2019 - 2023*
 
 ```js
 Plot.plot({
@@ -142,11 +142,20 @@ Plot.plot({
 
   <div class="note">
     <p>
+    The graph above compares the percentage of food insecure individuals who fall above the SNAP threshold (i.e., those who earn too much to qualify for SNAP benefits) in North Carolina and the percentage of food insecure individuals who fall above the SNAP threshold in North Carolina’s Wake County (from 2019 to 2023). [<i>Data from Feeding America</i>].
+    </p>
+    <p>
+    The graph reveals that <b>Wake County food insecurity needs are not being met at a rate that is consistently higher than average for the state</b>.
+    </p>
+    <p>
+    <i>*Based on 2023 Data</i>
     </p>
   </div>
 
+**From this data, one can conclude that (1) <i>SNAP income eligibility requirements are too strict considering skyrocketing living expenses</i>, (2) <i>there are too few SNAP benefits to go around</i>, and (3) <i>food insecurity in Wake County has not been managed sufficiently by SNAP.</i>**
+
 **Data Sources**
-- USDA, SNAP Cost-of-Living Adjustment (COLA) Information
-- USDA, SNAP Data Tables
-- NC Budget and Tax Center, 2025 Living Income Standard Report
-- Feeding America, Map the Meal Gap Data
+- USDA, [SNAP Cost-of-Living Adjustment (COLA) Information](https://www.fns.usda.gov/snap/allotment/cola)
+- USDA, [SNAP Data Tables](https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap)
+- NC Budget and Tax Center, [2025 Living Income Standard Report](https://ncbudget.org/2025-living-income-standard/)
+- Feeding America, [Map the Meal Gap Data](https://www.feedingamerica.org/research/map-the-meal-gap/overall-executive-summary)

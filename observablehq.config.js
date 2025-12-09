@@ -18,11 +18,9 @@ export default {
   // lets you organize them into sections and have unlisted pages.
   pages: [
     {
-      name: "Processing",
+      name: "SQ1",
       pages: [
-        {name: "Processing Example", path: "/processing-example"},
-        {name: "SNAP Recipient Yearly Totals", path: "/acs-race-grouping-2012-22"},
-        {name: "SQ1", path: "/snap-us-income-elig-fy20to26"}                
+        {name: "SQ1: Are SNAP benefits becoming harder to access?", path: "/snap-us-income-elig-fy20to26"}                
       ]
     },
   ],
