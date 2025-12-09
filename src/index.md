@@ -15,7 +15,7 @@ SNAP benefits have become harder to access for those who need them. Benefit amou
 
 Without an increase to SNAP benefits, food insecurity rates will increase across the country as well as reliance on community-based relief.
 
-If the federal government would increase the budget for SNAP and loosen the eligibility requirements so more people can access benefits, individuals facing food insecurity could become more financially, physically, and emotionally secure.
+If data professionals can provide clear evidence of the harms associated with cutting funding to SNAP, the government may increase the program budget and reduce the barriers to eligibility. As a result, more people would be able to access benefits, and individuals facing food insecurity would become more financially, physically, and emotionally secure.
 
 ## Specifying Questions
 
@@ -31,7 +31,7 @@ It is important to us as researchers to follow a social justice ethic in our wor
 
 ## Case Scenario
 
-You are a policymaker trying to understand who receives SNAP benefits in Wake County and how policies impact people facing food insecurity in your area. What sorts of local policies and/or supplemental assistance could you provide Wake County residents?
+A group of data professionals want to learn who is receiving SNAP benefits in Wake County, and how SNAP program policy changes have affected residents facing food insecurity, so they can present this information to local policymakers and make a case for them to advocate for increased funding to SNAP (and/or community-based relief initiatives).
 
 ## About the Data
 
