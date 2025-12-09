@@ -1,10 +1,8 @@
 # SNAP Benefits
 
-**NOTE FOR NEW PROJECT**: Don't forget to update the `observablehq.config.js` file. Delete this paragraph, when completed.
-
-- Name here
-- Name here
-- Name here
+- Beatrice Ogeh
+- Alyssa Johnson
+- Sami Zito
 
 Enter brief description of the project.
 
@@ -14,7 +12,7 @@ Enter brief description of the project.
 ## About the Data
 
 **`src/data/path/to/dataset.csv`**
-- **Topic**: Enter broader topic of dataset.
+- **Topic**: SNAP .
 - **Overview**: Enter brief description for each dataset.
 - **Source**: [Enter link to source]()
 - **Sample Row**:
@@ -22,8 +20,6 @@ Enter brief description of the project.
   enter,sample,row,here
   1,2,3,"Hello world!"
   ```
-
-See the README for the dataset for more information.
 
 ## About the Data App
 
