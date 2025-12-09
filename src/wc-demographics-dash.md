@@ -90,7 +90,10 @@ function launchSnapCount(data, {width} = {}) {
   </div>
 </div>
 
-From 2010 to 2024, the population in Wake County has steadily increased. However, the number of households receiving SNAP has remained relatively the same. As cost-of-living has risen over the past few years, we would expect that more households would rely on SNAP for groceries. This trend shows the opposite despite the fact that 126,110 Wake County residents are food insecure (Wake.gov)
+<div>
+  From 2010 to 2024, the population in Wake County has steadily increased. However, the number of households receiving SNAP has remained relatively the same. As cost-of-living has risen over the past few years, we would expect that more households would rely on SNAP for groceries. This trend shows the opposite despite the fact that 126,110 Wake County residents are food insecure (Wake.gov)
+</div>
+<br>
 
 ## Income
 
@@ -137,12 +140,18 @@ function launchWCIncomes(data, {width} = {}) {
   <div class="card">
     ${resize((width) => launchWCIncomes(cleanedWCIncomes, {width}))}
   </div>
-  </div>
 </div>
 
-The majority of SNAP Households in Wake County fall beneath the poverty line with most townships' SNAP households making less than $40,000 per year.
-
-***Note***: Bartons Creek, Buckhorn, and White Oak did not have any SNAP households in 2024.
+<div>
+  <span>
+    The majority of SNAP Households in Wake County fall beneath the poverty line with most townships' SNAP households making less than $40,000 per year.
+  </span>
+<br></br>
+  <span>
+    <b><i>Note</b></i>: Bartons Creek, Buckhorn, and White Oak did not have any SNAP households in 2024.
+  </span>
+<div>
+<br>
 
 ## Household Types (based on presence of children)
 
@@ -256,7 +265,7 @@ function spatialChildren(data, {width}){
   },
   marks: [
     Plot.geo(countyGeoJSON,{
-      stroke: "black",
+      stroke: "gray",
       fill: "percSnapChildren",
       tip: true
     }),
@@ -310,7 +319,7 @@ function spatialSingleFemale(data, {width}){
   },
   marks: [
     Plot.geo(countyGeoJSON,{
-      stroke: "black",
+      stroke: "gray",
       fill: "singleFemalePerc",
       tip: true
     }),
@@ -327,25 +336,33 @@ function spatialSingleFemale(data, {width}){
   ]
 })}
 ```
-<div class="grid grid-cols-2">
+
+<!-- household caption -->
+<div class="grid grid-cols-1">
   <div class="card">
     ${resize((width) => childHouseChart(finalChildrenData, {width}))}
   </div>
   <div class="card"> ${resize((width) => singleFemaleChart(singleFemale, {width}))}
   </div>
   </div>
-<div class="grid grid-cols-2">
+<div class="grid grid-cols-1">
   <div class = "card">${resize((width) => spatialChildren(countyGeoJSON, {width}))}
   </div>
   <div class = "card">${resize((width) => spatialSingleFemale(countyGeoJSON, {width}))}
   </div>
 </div>
+<div>
+  <span>
+    As we look at SNAP households with children, the majority of households are categorized as "Single Female". This group encompasses single mothers and other non-married single female householders with children. About 1/3 of all single female houses (with children) in Wake County receive SNAP benefits. Raleigh has the highest concentration of single women with kids who receive SNAP and households with children who receive SNAP. 
+  </span>
+  <br></br>
+  <span>
+    Single mothers likely receive SNAP benefits at a higher rate due to multiple economic factors. These include lower wages, increased cost of childcare, and having only a single source of income. Other factors like race and education also play a role in income. Unfortunately, ACS data does not show the intersections of these factors.
+  </span>
+</div>
+<br>
 
-As we look at SNAP households with children, the majority of households are categorized as "Single Female". This group encompasses single mothers and other non-married single female householders with children. About 1/3 of all single female houses (with children) in Wake County receive SNAP benefits. Raleigh has the highest concentration of single women with kids who receive SNAP and households with children who receive SNAP. 
-
-Single mothers likely receive SNAP benefits at a higher rate due to multiple economic factors. These include lower wages, increased cost of childcare, and having only a single source of income. Other factors like race and education also play a role in income. Unfortunately, ACS data does not show the intersections of these factors.
-
-
+<!-- single mother charts -->
 ```js
 let wcHouseYearsMap = houseMapYearFunc(wcHouseYears)
 let singleMotherData = singleMotherFunc(wcHouseYearsMap)
@@ -472,7 +489,7 @@ function launchCompHouseholdYears(data, {width} = {}) {
 }
 ```
 ### Single Female Households (with children) Over the Last Decade
-<!-- div skeleton -->
+<!-- single mother over decade  -->
 <div class="grid grid-cols-1">
   <div class="card">
     ${resize((width) => launchHouseholdYears(singleMotherData, {width}))}
@@ -481,8 +498,10 @@ function launchCompHouseholdYears(data, {width} = {}) {
     ${resize((width) => launchCompHouseholdYears(singleMotherData, {width}))}
   </div>
 </div>
-
+<div>
 Overall the percentage SNAP households with a female householder and children has remained steady over the past decade. The same is true when comparing SNAP and non-SNAP single women with children. Although each township shows individual variability over the years, the Wake County avg has slightly decreased over the past decade.
+</div>
+<br>
 
 ## Disability Status
 
@@ -676,7 +695,7 @@ function spatialDisonSnap (data, {width}){
 })}
 ```
 
-<div class="grid grid-cols-2">
+<div class="grid grid-cols-1">
   <div class="card">
     ${resize((width) => launchDisCounts(snapDisMap, {width}))}
   </div>
@@ -684,11 +703,12 @@ function spatialDisonSnap (data, {width}){
     ${resize((width) => spatialSnapWithDis(countyGeoJSON, {width}))}
   </div>
 </div>
+<div>
+  About half of all households that receive SNAP benefits have at least 1 individual with a disability. Approximately 8.6% of the Wake County population has a disability. A large portion of these individuals are unemployed and may not be able to work because of their disability. Disability come in many forms, from physical disabilities impacting mobility, vision, or hearing, developmental disabilities, and mental health conditions. Most workplaces and public services are not prepared to accomodate different disabilities making it harder for these individuals to find and keep work (or simply navigate to work). Potential SNAP cuts may prevent these residents (who have increased employment limitations) from receiving necessary supplemental income for food
+</div>
+<br>
 
-About half of all households that receive SNAP benefits have at least 1 individual with a disability. Approximately 8.6% of the Wake County population has a disability. A large portion of these individuals are unemployed and may not be able to work because of their disability. Disability come in many forms, from physical disabilities impacting mobility, vision, or hearing, developmental disabilities, and mental health conditions. Most workplaces and public services are not prepared to accomodate different disabilities making it harder for these individuals to find and keep work (or simply navigate to work). Potential SNAP cuts may prevent these residents (who have increased employment limitations) from receiving necessary supplemental income for food
-
-
-<div class="grid grid-cols-2">
+<div class="grid grid-cols-1">
   <div class="card">
     ${resize((width) => launchOnlyDisCounts(snapDisMap, {width}))}
   </div>
@@ -696,6 +716,10 @@ About half of all households that receive SNAP benefits have at least 1 individu
     ${resize((width) => spatialDisonSnap(countyGeoJSON, {width}))}
   </div>
 </div>
+<div>
+A significant percentage of households with at least one individual with a disability do not receive SNAP. Some townships had no households with disabled individuals receiving SNAP. Meanwhile, over 25% of Raleigh's  households with at least one individual with a disability received SNAP benefits. 
+</div>
+<br>
 
 ## Individuals Over 60 Years Old
 
@@ -897,21 +921,43 @@ function spatialOnlyOverSixty(geojson, {width}) {
   });
 }
 ```
-<div class="grid grid-cols-2">
+<div class="grid grid-cols-1">
   <div class="card">
     ${resize((width) => launchOverSixty(snapOver60Final, {width}))}
   </div>
   <div class="card">
-    ${resize((width) => launchOnlyOverSixty(only60, {width}))}
-  </div>
-  <div class="card">
    ${spatialSnapOverSixty(countyGeoJSON, {width})}
+  </div>
+</div>
+<div>
+  Approximately 1/3 of all SNAP households in Wake County had at least one individual 60 years or older. In some townships like Marks Creek and Little River, over half of all SNAP households had at least one individual 60 years or older. Parts of Northern County had a smaller percentage of elderly individuals on SNAP.
+</div>
+<br>
+<div class="grid grid-cols-1">
+   <div class="card">
+    ${resize((width) => launchOnlyOverSixty(only60, {width}))}
   </div>
    <div class="card">
    ${spatialOnlyOverSixty(countyGeoJSON, {width})}
   </div>
 </div>
+<div>
+  Compared to the percentage of SNAP houses with an elderly individual, only a small percentage of all individuals 60+ years old receive SNAP benefits in Wake County. The highest concentration of 60+ year old SNAP recipients was found in Eastern Wake County. Townships in the western part of the county only had 0-3% of individuals 60 years or older on SNAP.
+</div>
+<br>
 
+## Final Thoughts
+<div>
+  <span>
+    SNAP was created to assist our most vulnerable residents: those with low-income,    children, the elderly, and people with disabilities. Based on the demographics data collected an analyzed, SNAP is being utilized by these vulernable and marginalized populations. Large percentages of SNAP households in Wake County, NC contain a person over 60, a individual with a disability, and/or a child (specfically a Child living under a single female head-of-house.) Additionally, we can assume (based on the percentages showcased) that intersectionality plays a part in these demographics of SNAP recipients. For example, a single female householder may also have a disabiltiy. However, the ACS datasets are too narrow to say how often intersecting identities occur in SNAP households. These demographics help grasp which groups of people are most impacted by government shutdowns and reducing SNAP funding. Overall, central and eastern Wake County house these most vulnerable residents. During times of reduced SNAP funding, these areas may need additional support from the community and local government.
+  </span>
+  <br></br>
+  <span>
+    As noted in the data analysis regarding individuals with disabilities and people over 60, many household falling into these groups do not receive SNAP benefits. These households may not need benefits and have suffcient resources to support themselves without supplemental income. However, 51% of food insecure people in Wake County do not qualify for SNAP. It is likely more individuals belonging to theses vulernable populations need additional assistance they are not currently receiving.
+  </span>
+</div>
+
+<br>
 
 ## Data & Resources 
  
