@@ -14,7 +14,17 @@ export default {
   // The pages and sections in the sidebar. If you don’t specify this option,
   // all pages will be listed in alphabetical order. Listing pages explicitly
   // lets you organize them into sections and have unlisted pages.
-  pages: [
+  // pages: [
+  //   {
+  //     name: "Examples",
+  //     pages: [
+  //       {name: "Dashboard", path: "/example-dashboard"},
+  //       {name: "Report", path: "/example-report"}
+  //     ]
+  //   }
+  // ],
+ pages: [
+    // GETTING STARTED
     {
       name: "SQ1",
       pages: [
@@ -22,12 +32,30 @@ export default {
       ]
     },
   ],
+      name: "Wake County SNAP Data",
+      open: false,
+      pages: [
+        {name: "data", path: "/counties-data"},
+        {name: "acs processing", path: "/acs-processing"},
+        {name: "Wake County SNAP Households with Children", path: "/wc-snap-children"},
+        {name: "Wake County SNAP Households with Disabilities", path: "/wc-snap-disabilities"},
+      ]
+    },
+ ]  
+  // pages: [
+  //   {
+  //     name: "Processing",
+  //     pages: [
+  //       {name: "Processing Example", path: "/processing-example"},
+  //     ]
+  //   }
+  // ],
 
   // Content to add to the head of the page, e.g. for a favicon:
-  head: '<link rel="icon" href="observable.png" type="image/png" sizes="32x32">',
+  //head: '<link rel="icon" href="observable.png" type="image/png" sizes="32x32">',
 
   // The path to the source root.
-  root: "src",
+ // root: "src",
 
   // Some additional configuration options and their defaults:
   // theme: "default", // try "light", "dark", "slate", etc.

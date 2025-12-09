@@ -1,4 +1,4 @@
-# Enter Title of Project Here
+# SNAP Benefits
 
 **NOTE FOR NEW PROJECT**: Don't forget to update the `observablehq.config.js` file. Delete this paragraph, when completed.
 
