@@ -1,33 +1,32 @@
 # SNAP Benefits Accessibility in Wake County, North Carolina
-
+|
 ## Exigence
 
-Our current presidential administration (and the recent government shutdown) have reduced support/funding for SNAP benefits nationally. This has led many families across the country to experience higher levels of food insecurity. Trump's "Big Beautiful Bill" makes it harder for people to meet the requirements for SNAP benefits, and has brought billions of dollars in cuts to the SNAP program. (The current government shutdown is also impacting SNAP; without a budget, the government will not be able to disperse SNAP benefits to those who need them -- change to past tense, allude to possible future shutdown issues)
+Our current presidential administration has significantly reduced support/funding for Supplemental Nutrition Assistance Program (SNAP) benefits nationally. This has led many families across the country to experience higher levels of food insecurity.
+
+Trump's "Big Beautiful Bill" makes it harder for people to meet the requirements for SNAP benefits, and will bring $187 billion dollars in cuts to the program over the next 10 years.
+
+Additionally, the recent government shutdown (October 1, 2025 to November 12, 2025) caused a disruption to SNAP benefits; during that time, many payments were delayed or only partially disbursed. Future shutdowns could cause SNAP to become an unreliable resource. 
 
 ## Hypothesis
 
-SNAP benefits are becoming harder for those who need them to access. The benefits are not keeping up the pace with population growth, inflation, or wages, leading them to have a smaller impact on the individuals who depend on them. Without an increase to SNAP benefits, food insecurity rates will increase across the country as well as reliance on community-based relief. If the government passed funding to increase the budget towards SNAP and lower the requirements so more people can access these benefits, citizens facing food insecurity could become more financially, physically, and emotionally secure.
+SNAP benefits have become harder to access for those who need them. Benefit amounts are not keeping up with population growth, inflation, or wages, leading them to have a smaller impact on the individuals who depend on them.
+
+Without an increase to SNAP benefits, food insecurity rates will increase across the country as well as reliance on community-based relief.
+
+If the federal government would increase the budget for SNAP and loosen the eligibility requirements so more people can access benefits, individuals facing food insecurity could become more financially, physically, and emotionally secure.
 
 ## Specifying Questions
 
-1. Have SNAP benefits become more difficult for food insecure individuals to access (in Wake County and nationally)?
-2. What characteristics make up SNAP recipients in Wake County?
-3. How do SNAP benefits impact food insecurity levels in Wake County?
+1. Have SNAP benefits become more difficult for food insecure individuals to access (in Wake County, NC, and nationally)? [Beatrice]
+2. What characteristics make up SNAP recipients in Wake County, NC? [Sami]
+3. How do SNAP benefits impact food insecurity levels in Wake County, NC? [Alyssa]
 
 ## Project Goals
 
- Incorporate aspects of a SJ ethic and/or structuralist approach
+Our project aims to provide compelling evidence of growing food insecurity and the individuals/groups most affected by it, as well as the degree to which SNAP has mitigated food insecurity in Wake County and the greater United States. 
 
-Structuralist-
-Materialization
-Help clients recognize that their personal problems may be the result of material deprivation caused by structural issues.
-
-Defense of the Client
-Help defend clients against an oppressive system (advocate on their behalf)
-
-SJ ethic-
-Principle 2: Challenge power
-Collecting counterdata (data produced as a means for enabling disadvantaged communities to reclaim political power; to counter missing data or to challenge existing data)
+It is important to us as researchers to follow a social justice ethic in our work. We intend for our research to emphasize structural issues that have caused many to experience extreme material deprivation, serve as a resource that changemakers can use to advocate on the behalf of marginalized communities, and reclaim power for disadvantaged people by strengthening the existing research on our subject.
 
 ## Case Scenario
 
@@ -35,18 +34,13 @@ You are a policymaker trying to understand who receives SNAP benefits in Wake Co
 
 ## About the Data
 
-Include datasets used here, info about cleaning/processing labor, etc.
-(Principle 7: Make labor visible - sj ethic)
+Our research project incorporates data from the U.S. Census Bureau/American Community Survey (ACS), the U.S. Department of Agriculture (USDA), and Feeding America.
 
-Was difficult to collect data b/c data from the Census website due to the shutdown; also Census website tools are hard to use, inconvenient, not user friendly
+Due to the recent government shutdown (which impaired the function of many government websites), the Census data were especially difficult to collect. The data tools on the Census website are also not very user-friendly.
 
-Principle 6: Consider context
+Additionally, there were data we wanted to use was simply unavailable (e.g., the # of people approved for SNAP vs. the # of SNAP applicants), and we learned that SNAP/food insecurity cases are sometimes underreported.
 
-- Under-reporting 
-
-- Unavailable data (applied vs approved)
-
-- COVID effects
+Refining and processing the data (i.e., reducing unwieldy, often coded datasets to only information pertinent to our specific research purposes) involved a great deal of labor; much of our time on this project was spent on just that.
 
 
 
