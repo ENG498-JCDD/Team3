@@ -1,7 +1,15 @@
 // See https://observablehq.com/framework/config for documentation.
 export default {
+  header: "Team 3 - SNAP Benefits",
   // The app’s title; used in the sidebar and webpage titles.
   title: "SNAP Benefits",
+
+  // Configuration options and their defaults:
+  sidebar: true, // whether to show the sidebar
+  toc: true, // whether to show the table of contents
+  pager: true, // whether to show previous & next links in the footer
+  search: true, // activate search
+  preserveExtension: true, // preserves .html extension
 
   // The pages and sections in the sidebar. If you don’t specify this option,
   // all pages will be listed in alphabetical order. Listing pages explicitly
@@ -18,6 +26,12 @@ export default {
  pages: [
     // GETTING STARTED
     {
+      name: "SQ1",
+      pages: [
+        {name: "SQ1: Are SNAP benefits becoming harder to access?", path: "/snap-us-income-elig-fy20to26"}                
+      ]
+    },
+  ],
       name: "Wake County SNAP Data",
       open: false,
       pages: [
