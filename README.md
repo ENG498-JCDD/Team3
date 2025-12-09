@@ -25,6 +25,47 @@ Our project aims to provide compelling evidence of growing food insecurity and t
   enter,sample,row,here
   1,2,3,"Hello world!"
   ```
+  **`src\data\census-2023\wc-snap-people-over-60-years.csv`**
+- **Topic**: SNAP status vs. Age.
+- **Overview**: Looks at snap status compared to people 60+ years old in wake county townships
+- **Source**: [Census Reporter](https://censusreporter.org/tables/B22001/)
+- **Sample Row**:
+  ```csv
+  06000US3718393984,"WHITE OAK",40904,1033,857,223,370,165,487,171,40047,1063,5685,558,34362,1106
+  ```
+**`src\data\census-2023\wc-snap-households-with-children.csv`**
+- **Topic**: SNAP status vs. Houseold income.
+- **Overview**: Looks at snap status compared to household income in wake county townships
+- **Source**: [Census Reporter](https://censusreporter.org/tables/B22008/)
+- **Sample Row**:
+  ```csv
+  06000US3718390164,"BARTONS CREEK",8220,456,99,53,75,48,24,24,51,45,34,37,17,28,0,25,24,27,0,25,14,21,14,21,0,25,10,16,8121,462,3000,386,2628,341,372,206,65,51,307,215,0,25,5121,314,3844,254,218,118,37,27,181,115,1059,194
+  ```
+  **`src\data\census-2023\wc-median-household-income.csv`**
+- **Topic**: SNAP status vs. Houseold Type.
+- **Overview**: Looks at snap status compared to household type (with consideration of children presence) in wake county townships
+- **Source**: [Census Reporter](https://censusreporter.org/tables/B22002/)
+- **Sample Row**:
+  ```csv
+  06000US3718390164,"BARTONS CREEK",8220,456,99,53,75,48,24,24,51,45,34,37,17,28,0,25,24,27,0,25,14,21,14,21,0,25,10,16,8121,462,3000,386,2628,341,372,206,65,51,307,215,0,25,5121,314,3844,254,218,118,37,27,181,115,1059,194
+  ````
+
+  **`src\data\wc-snap-count\b19058.csv`**
+- **Topic**: Number of snap households
+- **Overview**: Looks at snap household count in wake county since 2010
+- **Source**: [United States Census Bureau](https://data.census.gov/table/ACSDT1Y2021.B19058?q=SNAP/Food+Stamps&g=050XX00US37183&moe=false)
+- **Sample Row**:
+ ```csv
+ 2010,338054,22718,315336
+ ```
+  **`src\data\wc-snap-count\acs-b22002.csv`**
+- **Topic**: Number of snap households by type
+- **Overview**: Looks at snap household by type in wake county since 2016
+- **Source**: [United States Census Bureau](https://data.census.gov/table/ACSDT1Y2024.B22002?q=SNAP/Food+Stamps&g=050XX00US37183)
+- **Sample Row**:
+ ```csv
+ 2023,Buckhorn,3897,0,0,0,0,0,0,0,0,0,0,0,0,0,3897,2471,2218,253,48,205,0,1426,815,169,94,75,442
+ ```
 
 ## About the Data App
 
