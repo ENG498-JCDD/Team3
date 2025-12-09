@@ -6,8 +6,7 @@
 
 Our project aims to provide compelling evidence of growing food insecurity and the individuals/groups most affected by it, as well as the degree to which the SNAP program has mitigated food insecurity in Wake County and the greater United States.
 
-- [Project Tracker]()
-  - **WARNING!**: Be sure to just share the direct URL, since I have added everyone in the class to the Drive folder overall. So, do not provide the "Share" link. We want to make sure the information remains secure.
+- [Project Tracker](https://docs.google.com/spreadsheets/d/1lxIZQuG1yzJ_CkDQdpC8MO9bCqgniBDE/edit?gid=1372465741#gid=1372465741)
 
 ## About the Data
 
