@@ -13,8 +13,16 @@
     "d3": "^7.9.0",
     "d3-dsv": "^3.0.1",
     "d3-time-format": "^4.1.0",
+<<<<<<< HEAD
     "htl": "^0.3.1"
   
+=======
+    "htl": "^0.3.1",
+    "dependencies": "^0.0.1",
+    "node": "^25.1.0",
+    "scripts": "^0.1.0",
+    "type": "^2.7.3"
+>>>>>>> f89e7bd9388915ef0bcacd3846d37310df8254bf
   },
   "devDependencies": {
     "rimraf": "^6.1.0"
