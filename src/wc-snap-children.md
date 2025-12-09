@@ -137,10 +137,7 @@ Plot.plot({
 ```js
 let singleMotherHouseholds = Array.from(childHouseholds)
 //grouping of only single mother households, snap and non snap
-let singleMothers = singleMotherHouseholds.flatMap(d => [
-  {area: d.area, type: "SNAP:Single Mother", count: d.snap.withChildren.singleMother},
-  {area: d.area, type: "Non-SNAP: Single Mother", count: d.nonSnap.withChildren.singleMother},
-])
+
 
 ```
 ## SNAP status of single mothers in Wake County
@@ -185,15 +182,15 @@ Plot.plot({
 let countyGeoJSON = FileAttachment("./data/wc-geo/Townships.geojson").json()
 ```
 ```js
-let areaPercChildren = new Map(percentageTest.map(d => [d.area, d.percSnapChildren]));
+let areaPercChildren = new Map(percentageTest.map(d => [d.area, d.percSnapChildren]))
 
 // Combine GeoJSON with percentages
 countyGeoJSON.features.map(f => {
   let areaName = f.properties.NAME; // adjust to your property name
   f.properties.percSnapChildren = areaPercChildren.get(areaName);
-});
+})
 
-let path = d3.geoPath(projection);
+let path = d3.geoPath(projection)
 
 ```
 ```js
@@ -209,9 +206,9 @@ countyGeoJSON
 //countyGeoJSON.features[0].geometry.coordinates[0][0]
 ```
 ```js
-import * as d3 from "d3";
+import * as d3 from "d3"
 
-let projection = d3.geoMercator().fitSize([1200, 800], countyGeoJSON);
+let projection = d3.geoMercator().fitSize([1200, 800], countyGeoJSON)
 ```
 ```js
 Plot.plot({
@@ -236,4 +233,14 @@ Plot.plot({
 ```js
 //console.log(countyGeoJSON.features.properties)
 
+```
+```js
+let houseIncome = FileAttachment("./data/census-2023/wc-median-income-household-type.csv").csv({typed: true})
+console.log(houseIncome.femaleHouseholderWithKids)
+
+let houseIncomeReduced = d3.group(houseIncome,
+  (d) => d.area);
+```
+```js
+houseIncomeReduced
 ```

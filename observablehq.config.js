@@ -25,6 +25,18 @@ export default {
   // ],
  pages: [
     // GETTING STARTED
+    // {
+    //   name: "Wake County SNAP Data",
+    //   open: false,
+    //   pages: [
+    //     {name: "data", path: "/counties-data"},
+    //     {name: "Wake County SNAP Households with Children", path: "/wc-snap-children"},
+    //     {name: "Wake County SNAP Households with Disabilities", path: "/wc-snap-disabilities"},
+    //     {name: "Wake County SNAP Households with Members over 60", path: "/wc-snap-over60"},
+        
+    //   ]
+    // },
+    {name: "Wake County SNAP Demographics", path: "/wc-demographics-dash"},
     {
       name: "SQ1",
       pages: [

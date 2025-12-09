@@ -4,7 +4,7 @@ title: Example dashboard
 toc: false
 ---
 
-# Rocket launches 🚀
+# Wake County SNAP Demographics
 
 <!-- Load and transform the data -->
 
@@ -28,12 +28,12 @@ const color = Plot.scale({
 
 <div class="grid grid-cols-4">
   <div class="card">
-    <h2>United States 🇺🇸</h2>
-    <span class="big">${launches.filter((d) => d.stateId === "US").length.toLocaleString("en-US")}</span>
+    <h2>Households in Wake County <span class="muted"> 2024</span></h2>
+    <span class="big">499,951</span>
   </div>
   <div class="card">
-    <h2>Russia 🇷🇺 <span class="muted">/ Soviet Union</span></h2>
-    <span class="big">${launches.filter((d) => d.stateId === "SU" || d.stateId === "RU").length.toLocaleString("en-US")}</span>
+    <h2>SNAP Households<span class="muted"> 2024</span></h2>
+    <span class="big">27,193</span>
   </div>
   <div class="card">
     <h2>China 🇨🇳</h2>
