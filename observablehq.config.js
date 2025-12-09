@@ -21,8 +21,8 @@ export default {
       name: "Processing",
       pages: [
         {name: "Processing Example", path: "/processing-example"},
-        {name: "SQ3", path: "/acs-race-grouping-2012-22"},
-        {name: "SNAP Income Eligibility", path: "/snap-us-income-elig-fy20to26"}                
+        {name: "SNAP Recipient Yearly Totals", path: "/acs-race-grouping-2012-22"},
+        {name: "SQ1", path: "/snap-us-income-elig-fy20to26"}                
       ]
     },
   ],
