@@ -1,5 +1,6 @@
 # SNAP Benefits Accessibility in Wake County, North Carolina
-|
+By: Beatrice Ogeh, Alyssa Johnson, Sami Zito
+
 ## Exigence
 
 Our current presidential administration has significantly reduced support/funding for Supplemental Nutrition Assistance Program (SNAP) benefits nationally. This has led many families across the country to experience higher levels of food insecurity.

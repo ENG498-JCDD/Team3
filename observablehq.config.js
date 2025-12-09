@@ -36,25 +36,32 @@ export default {
         
     //   ]
     // },
-    {name: "Wake County SNAP Demographics", path: "/wc-demographics-dash"},
+    {name: "Home Page", path: "/index"},
     {
-      name: "SQ1",
+      name: "Specifyin Question Dashboards",
+      open: true,
       pages: [
-        {name: "SQ1: Are SNAP benefits becoming harder to access?", path: "/snap-us-income-elig-fy20to26"}                
+         {name: "SQ1: Are SNAP benefits becoming harder to access?", path: "/snap-us-income-elig-fy20to26"},
+        {name: "SQ2: Wake County SNAP Demographics", path: "/wc-demographics-dash"},
+        {name: "SQ3: How do SNAP benefits impact food insecurity levels in Wake County?", path: "/sq3-report"},
       ]
     },
-  ],
-      name: "Wake County SNAP Data",
-      open: false,
-      pages: [
-        {name: "Home Page", path: "/index.md"},
-        {name: "data", path: "/counties-data"},
-        {name: "acs processing", path: "/acs-processing"},
-        {name: "Wake County SNAP Households with Children", path: "/wc-snap-children"},
-        {name: "Wake County SNAP Households with Disabilities", path: "/wc-snap-disabilities"},
-      ]
-    },
- ]  
+   
+    {name: "Data Design", path: "/data-design"},
+    {name: "Reflection", path: "/reflection"}
+  ]
+
+//       name: "Wake County SNAP Data",
+//       open: false,
+//       pages: [
+       
+//         {name: "data", path: "/counties-data"},
+//         {name: "acs processing", path: "/acs-processing"},
+//         {name: "Wake County SNAP Households with Children", path: "/wc-snap-children"},
+//         {name: "Wake County SNAP Households with Disabilities", path: "/wc-snap-disabilities"},
+//       ]
+//     },
+//  ]  
   // pages: [
   //   {
   //     name: "Processing",
