@@ -47,6 +47,7 @@ export default {
       name: "Wake County SNAP Data",
       open: false,
       pages: [
+        {name: "Home Page", path: "/index.md"},
         {name: "data", path: "/counties-data"},
         {name: "acs processing", path: "/acs-processing"},
         {name: "Wake County SNAP Households with Children", path: "/wc-snap-children"},
