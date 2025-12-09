@@ -4,7 +4,7 @@
 - Alyssa Johnson
 - Sami Zito
 
-Enter brief description of the project.
+Our project aims to provide compelling evidence of growing food insecurity and the individuals/groups most affected by it, as well as the degree to which SNAP has mitigated food insecurity in Wake County and the greater United States.
 
 - [Project Tracker]()
   - **WARNING!**: Be sure to just share the direct URL, since I have added everyone in the class to the Drive folder overall. So, do not provide the "Share" link. We want to make sure the information remains secure.
@@ -12,9 +12,14 @@ Enter brief description of the project.
 ## About the Data
 
 **`src/data/path/to/dataset.csv`**
-- **Topic**: SNAP .
+- **Topic**: SNAP Benefits
 - **Overview**: Enter brief description for each dataset.
-- **Source**: [Enter link to source]()
+  SNAP Cost-of-Living Adjustment (COLA) Information, USDA
+  SNAP Data Tables, USDA
+  Map the Meal Gap Data, Feeding America
+  Census/American Community Survey, US Census Bureau
+  Wake County Food Bank
+- **Source**: [`src/data/path/to/dataset.csv`]()
 - **Sample Row**:
   ```csv
   enter,sample,row,here
