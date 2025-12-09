@@ -1,16 +1,14 @@
 // See https://observablehq.com/framework/config for documentation.
 export default {
-  header: "Team 3 - Beatrice Notebook",
+  header: "Team 3 - SNAP Benefits",
   // The app’s title; used in the sidebar and webpage titles.
-  title: "Team 3 - Beatrice Notebook",
+  title: "SNAP Benefits",
 
   // Configuration options and their defaults:
-  theme: "light",
   sidebar: true, // whether to show the sidebar
   toc: true, // whether to show the table of contents
   pager: true, // whether to show previous & next links in the footer
   search: true, // activate search
-  style: "style.css", // Global CSS styles
   preserveExtension: true, // preserves .html extension
 
   // The pages and sections in the sidebar. If you don’t specify this option,

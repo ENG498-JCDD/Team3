@@ -1,3 +1,9 @@
+```js
+import {FileAttachment} from "observablehq:stdlib";
+
+html`<link href="${await FileAttachment("style.css").url()}" rel="stylesheet" />`
+```
+
 # SQ1: Are SNAP benefits becoming harder to access?
 
 **The following line graphs show changes in SNAP accessibility over time, both nationally and in Wake County, North Carolina.** 
