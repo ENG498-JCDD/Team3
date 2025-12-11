@@ -8,41 +8,61 @@ This report covers the findings our team gathered on Wake County's food insecuri
 
 ## An Overview of Wake County's Food Insecurity Stats
 
-<div class="grid grid-cols-8">
+<!-- LINDGREN:
+  Love this use of the cards. I revised the crid column count,
+  because Observable Framework's CSS Grid only accounts for up
+  to 4 columns.
+
+  All of the figures in the `<span class="big">126,110</span>`
+  should be dynamically calculated from your datasets with the
+  ${variableNameHere} syntax. This ensures the following:
+
+  1. We know these numbers come directly from the dataset.
+  2. We can follow the result reported back to the dataset.
+  3. We can update these numbers, if the dataset is updated.
+-->
+<div class="grid grid-cols-2">
   <div class="card">
     <h2>Number of Food Insecure People</h2>
     <span class="big">126,110</span>
   </div>
   <div class="card">
-    <h3>Percentage Who Don't Qualify for SNAP</h3>
+    <h2>Percentage Who Don't Qualify for SNAP</h2>
     <span class="big">51%</span>
   </div>
   <div class="card">
     <h2>Number of Food Insecure Children</h2>
     <span class="big">33,550</span>
   </div>
-   <div class="card">
-    <h3>Percentage Who Don't Qualify for SNAP</h3>
+  <div class="card">
+    <h2>Percentage Who Don't Qualify for SNAP</h2>
     <span class="big">41%</span>
   </div>
-     <div class="card">
+  <div class="card">
     <h2>Food Insecure Citizens Overall</h2>
     <span class="big">1 in 8</span>
   </div>
-     <div class="card">
-    <h3>Food Insecure Black Citizens</h3>
+  <div class="card">
+    <h2>Food Insecure Black Citizens</h2>
     <span class="big">1 in 4</span>
   </div>
-     <div class="card">
-    <h3>Food Insecure Hispanic Citizens</h3>
+  <div class="card">
+    <h2>Food Insecure Hispanic Citizens</h2>
     <span class="big">1 in 5</span>
   </div>
-     <div class="card">
-    <h3>Food Insecure White Citizens</h3>
+  <div class="card">
+    <h2>Food Insecure White Citizens</h2>
     <span class="big">1 in 11</span>
   </div>
 </div>
 
+<!-- LINDGREN
+  Headings should be less abstract and more specific to the
+  main claim/takeaway. Think about what you want the audience
+  to know before they read your copy.
+
+  "People of Color are X% More Food Insecure Than White People in Wake County"
+-->
 ## Analyzing the Stats
 
 According to the [Wake County Food Security Program](https://www.wake.gov/departments-government/wake-county-food-security-program), over 126,000 Wake County residents are food insecure, including roughly 33,550 children. 51% of these residents don't qualify for SNAP benefits, including 41% of food insecure children. Additionally, according to the [Food Bank of Central & Eastern North Carolina](https://foodbankcenc.org/hunger-impact/county/wake), food insecurity impacts 1 in 8 Wake County citizens, including 1 in 4 Black citizens, 1 in 5 Hispanic citizens, and 1 in 11 White citizens. 

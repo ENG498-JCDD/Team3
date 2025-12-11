@@ -10,21 +10,7 @@ export default {
   pager: true, // whether to show previous & next links in the footer
   search: true, // activate search
   preserveExtension: true, // preserves .html extension
-
-  // The pages and sections in the sidebar. If you don’t specify this option,
-  // all pages will be listed in alphabetical order. Listing pages explicitly
-  // lets you organize them into sections and have unlisted pages.
-  // pages: [
-  //   {
-  //     name: "Examples",
-  //     pages: [
-  //       {name: "Dashboard", path: "/example-dashboard"},
-  //       {name: "Report", path: "/example-report"}
-  //     ]
-  //   }
-  // ],
- pages: [
-    // GETTING STARTED
+  pages: [
     // {
     //   name: "Wake County SNAP Data",
     //   open: false,
@@ -38,7 +24,7 @@ export default {
     // },
     {name: "Home Page", path: "/index"},
     {
-      name: "Specifyin Question Dashboards",
+      name: "Specifying Question Dashboards",
       open: true,
       pages: [
          {name: "SQ1: Are SNAP benefits becoming harder to access?", path: "/snap-us-income-elig-fy20to26"},
@@ -49,34 +35,13 @@ export default {
    
     {name: "Data Design", path: "/data-design"},
     {name: "Reflection", path: "/reflection"}
-  ]
-
-//       name: "Wake County SNAP Data",
-//       open: false,
-//       pages: [
-       
-//         {name: "data", path: "/counties-data"},
-//         {name: "acs processing", path: "/acs-processing"},
-//         {name: "Wake County SNAP Households with Children", path: "/wc-snap-children"},
-//         {name: "Wake County SNAP Households with Disabilities", path: "/wc-snap-disabilities"},
-//       ]
-//     },
-//  ]  
-  // pages: [
-  //   {
-  //     name: "Processing",
-  //     pages: [
-  //       {name: "Processing Example", path: "/processing-example"},
-  //     ]
-  //   }
-  // ],
+  ],
 
   // Content to add to the head of the page, e.g. for a favicon:
-  //head: '<link rel="icon" href="observable.png" type="image/png" sizes="32x32">',
+  head: '<link rel="icon" href="observable.png" type="image/png" sizes="32x32"><link rel="stylesheet" href="style.css" /><script src="https://unpkg.com/d3-regression@1.3.10/dist/d3-regression.min.js"></script><script>',
 
   // The path to the source root.
- // root: "src",
-
+  // root: "src",
   // Some additional configuration options and their defaults:
   // theme: "default", // try "light", "dark", "slate", etc.
   // header: "", // what to show in the header (HTML)

@@ -1,8 +1,9 @@
 ```js
-import {parseYear,snapYearFunc, snapCountsFunc, cleanAreaFunc, householdMappingFunc, snapChildrenPercFunc, stackedChildrenData, singleFemaleFunc, singleFemalePercFunc, stackedHouseFunc, houseMapYearFunc, stackedHousePercFunc, singleMotherFunc, singleMotherCompFunc, disabilityCountFunc, disabilityMapFunc, onlyDisabledIndivFunc, over60MapFunc, over60SnapFlatMapFunc, over60OnlyFlatMapFunc } from "./components/utils.js";
-import * as d3 from "d3";
-import {regressionLinear, regressionPolynomial} from "npm:d3-regression"
-import {InternMap,rollup,} from "d3-array";
+import {getUniquePropListBy, parseYear, snapYearFunc, snapCountsFunc, cleanAreaFunc, householdMappingFunc, snapChildrenPercFunc, stackedChildrenData, singleFemaleFunc, singleFemalePercFunc, stackedHouseFunc, houseMapYearFunc, stackedHousePercFunc, singleMotherFunc, singleMotherCompFunc, disabilityCountFunc, disabilityMapFunc, onlyDisabledIndivFunc, over60MapFunc, over60SnapFlatMapFunc, over60OnlyFlatMapFunc } from "./components/utils.js";
+// LINDGREN: No need to import D3 libs in Observable notebook files. Also, regressionPolynomial was never used
+// import * as d3 from "d3";
+// import {regressionLinear} from "d3-regression";
+// import {InternMap,rollup,} from "d3-array";
 ```
 # Wake County SNAP Demographics
 
@@ -40,7 +41,8 @@ let snapOver60 = FileAttachment("./data/census-2023/wc-snap-people-over-60-years
 
 ```js
 let formatSnapYears = snapYearFunc(snapCount)
-console.log(formatSnapYears)
+// LINDGREN: Remove logs, when complete
+// console.log(formatSnapYears)
 
 let snapHouseGroupCounts = snapCountsFunc(formatSnapYears)
 
@@ -90,10 +92,7 @@ function launchSnapCount(data, {width} = {}) {
   </div>
 </div>
 
-<div>
-  From 2010 to 2024, the population in Wake County has steadily increased. However, the number of households receiving SNAP has remained relatively the same. As cost-of-living has risen over the past few years, we would expect that more households would rely on SNAP for groceries. This trend shows the opposite despite the fact that 126,110 Wake County residents are food insecure (Wake.gov)
-</div>
-<br>
+From 2010 to 2024, the population in Wake County has steadily increased. However, the number of households receiving SNAP has remained relatively the same. As cost-of-living has risen over the past few years, we would expect that more households would rely on SNAP for groceries. This trend shows the opposite despite the fact that 126,110 Wake County residents are food insecure (Wake.gov)
 
 ## Income
 
@@ -161,42 +160,42 @@ let childrenPerc = snapChildrenPercFunc(snapChildren)
 let snapChildrenMap = householdMappingFunc(childrenPerc)
 let finalChildrenData = stackedChildrenData(snapChildrenMap)
 
-function childHouseChart(finalChildrenData, {width}) {
+const childHouseChart = (finalChildrenData, {width}) => {
   return Plot.plot({
-  title: "Types of SNAP Households with Children",
-  //move the margin so the town names are not cut off
-  marginLeft:150,
-  width: 1000,
-  height: 700,
-  x: {
-    grid: true,
-    label: "# of Households"
-  },
-  y: {
-    grid: true,
-    label: "Township",
-  },
-  color: {
-    //shows the legend
-    legend: true, 
-    scheme: "Observable10",
-  },
-  marks: [
-    //barX puts the area name on the y axis. I chose this bc of how long the names are so I prevented a jumbled mess
-    Plot.barX(finalChildrenData,
-    //Used the last grouped dataset (the one grouped by area, type, and count)
-      {
-        y:"area",
-        x:"count",
-        //filling by type will create the separately colored sections for each type of family
-        fill: "type",
-        tip:true,
-      }
-    ),
-    //adds an axis line
-    Plot.ruleY([0]),
-  ]
-})
+    title: "Types of SNAP Households with Children",
+    //move the margin so the town names are not cut off
+    marginLeft:150,
+    // width: 1000,
+    // height: 700,
+    x: {
+      grid: true,
+      label: "# of Households"
+    },
+    y: {
+      grid: true,
+      label: "Township",
+    },
+    color: {
+      //shows the legend
+      legend: true,
+      scheme: "Observable10",
+    },
+    marks: [
+      //barX puts the area name on the y axis. I chose this bc of how long the names are so I prevented a jumbled mess
+      Plot.barX(finalChildrenData,
+      //Used the last grouped dataset (the one grouped by area, type, and count)
+        {
+          y:"area",
+          x:"count",
+          //filling by type will create the separately colored sections for each type of family
+          fill: "type",
+          tip:true,
+        }
+      ),
+      //adds an axis line
+      Plot.ruleY([0]),
+    ]
+  })
 }
 ```
 <!-- SINGLE FEMALE FUNC -->
@@ -351,160 +350,265 @@ function spatialSingleFemale(data, {width}){
   <div class = "card">${resize((width) => spatialSingleFemale(countyGeoJSON, {width}))}
   </div>
 </div>
-<div>
-  <span>
-    As we look at SNAP households with children, the majority of households are categorized as "Single Female". This group encompasses single mothers and other non-married single female householders with children. About 1/3 of all single female houses (with children) in Wake County receive SNAP benefits. Raleigh has the highest concentration of single women with kids who receive SNAP and households with children who receive SNAP. 
-  </span>
-  <br></br>
-  <span>
-    Single mothers likely receive SNAP benefits at a higher rate due to multiple economic factors. These include lower wages, increased cost of childcare, and having only a single source of income. Other factors like race and education also play a role in income. Unfortunately, ACS data does not show the intersections of these factors.
-  </span>
-</div>
-<br>
 
+<!-- LINDGREN:
+  Removed unecessary divs for copy.
+  To note, those aren't the correct HTML
+  elements, as paragraphs are <p>
+-->
+
+As we look at SNAP households with children, the majority of households are categorized as "Single Female". This group encompasses single mothers and other non-married single female householders with children. About 1/3 of all single female houses (with children) in Wake County receive SNAP benefits. Raleigh has the highest concentration of single women with kids who receive SNAP and households with children who receive SNAP.
+
+Single mothers likely receive SNAP benefits at a higher rate due to multiple economic factors. These include lower wages, increased cost of childcare, and having only a single source of income. Other factors like race and education also play a role in income. Unfortunately, ACS data does not show the intersections of these factors.
+
+<!-- LINDGREN:
+  Not quite a decade, so you shouldn't use that language. Instead,
+  use the first year observed.
+
+  Also, parantheticals typically can create stutters in reading
+  experiences, so use sparingly.
+-->
+<!-- ### Single Female Households (with children) Over the Last Decade -->
+### Single Female Households With Children Since ${d3.min(singleMotherCompData, d => d.year)}
+
+<!-- LINDGREN
+  Added paragraph before the charts for framing purposes. ALways guide the audience,
+  when possible.
+
+  I also converted your charts to a comparative layout and matched their 'y' domains.
+-->
+
+Overall the percentage SNAP households with a female householder and children has remained steady over the past decade. The same is true when comparing SNAP and non-SNAP single women with children. Although each township shows individual variability over the years, the Wake County avg has slightly decreased over the past decade.
+
+<!-- LINDGREN: Moved this after the heading for clarity -->
 <!-- single mother charts -->
 ```js
 let wcHouseYearsMap = houseMapYearFunc(wcHouseYears)
 let singleMotherData = singleMotherFunc(wcHouseYearsMap)
+```
 
-let regression = regressionLinear()
-  .x(d => d.year)
-  .y(d => d.perc)
+<!-- LINDGREN
+  Let's let folks select township
+-->
+```js
+const locationArea = view(
+  Inputs.select(
+    // Get unique list of years as Integer/Number
+    getUniquePropListBy(singleMotherData, "area")
+      .sort( (a, b) =>  d3.descending(a.percentage, b.percentage) ),
+    {
+      label: html`<em>Select a Township</em>`,
+      value: ["Raleigh", "Cary", "Wake Forest"],
+      multiple: true,
+    }
+  )
+)
+```
 
-let regLine = regression(singleMotherData)
+<!-- sortedFilteredSMBL -->
+```js
+const filteredSingleMomsByLocation = []
+for (const d of singleMotherData) {
+  // Filter based on list of locations
+  for (let location of locationArea) {
+    if (d.area == location) {
+      filteredSingleMomsByLocation.push(d)
+    }
+  }
+}
 
+const sortedFilteredSMBL = filteredSingleMomsByLocation.sort(
+  (a,b) => d3.ascending(a.year, b.year)
+)
 
-function launchHouseholdYears(data, {width} = {}) {
-(singleMotherData)
+// This is actually not a d3 official library
+// let regression = regressionLinear()
+//   .x(d => d.year)
+//   .y(d => d.perc)
+// let regLine = regression(singleMotherData)
+```
+
+<!-- PLOT: launchHouseholdYears -->
+```js
+// LINDGREN: Converted to arrow function
+const launchHouseholdYears = (width, data, allData) => {
   return Plot.plot({
-  title: "Percentage of SNAP Households that were Single Female w/ Children",
-  style: {
-    fontSize: "18px",       // increases overall font size
-    fontFamily: "sans-serif",
-    fontWeight: "bold"
-  },
-  width: 1500,
-  height: 500,
-  marginLeft: 60,
-  marginBottom: 60,
-  y: {
-    grid: true,
-    label: "% of Households",
+    title: "Percentage of SNAP Households that were Single Female w/ Children",
+    // LINDGREN: Usually, let the theme styles do this work
+    // style: {
+    //   fontSize: "18px",       // increases overall font size
+    //   fontFamily: "sans-serif",
+    //   fontWeight: "bold"
+    // },
+    // width: 1500,
+    // height: 500,
+    // marginLeft: 60,
+    // marginBottom: 60,
+    y: {
+      grid: true,
+      label: "% of Households",
+      // LINDGREN: Important to retain actual scale here
+      domain: [0, 100],
     },
-  x: {
-    label: "Year",
-    tickPadding: 5,
-    domain: d3.range(2015, 2024), // explicit integer years
-    tickFormat: d3.format("d"),   // format without commas/decimals
-  },
-  color: {
-    scheme: "spectral",
-    legend: true,
-  },
-  marks: [
-    Plot.line(singleMotherData,
-      {
-        x:"year",
-        y:"perc",
-        stroke: "area",
-        strokeWidth: 3,
-        tip:true
-      },
-    ),
+    x: {
+      label: "Year",
+      // tickPadding: 5,
+      interval: 1, // explicit integer years
+      tickFormat: d3.format("d"),   // format without commas/decimals
+    },
+    color: {
+      // LINDGREN: Color schemes should match data type
+      scheme: "category10",
+      legend: true,
+    },
+    marks: [
+      Plot.lineY(data,
+        {
+          x:"year",
+          y:"perc",
+          // fy: "area",
+          stroke: "area",
+          // strokeWidth: 3,
+          tip: true,
+        },
+      ),
+      Plot.linearRegressionY(
+        // LINDGREN: Ensures this line is based on all data
+        allData,
+        {
+          x: "year",
+          y: "perc",
+        }
+      ),
       // Regression line (county-wide trend)
-    Plot.line(regLine, {
-      x: d => d[0],
-      y: d => d[1],
-      stroke: "white",
-      strokeDasharray: "4,2",
-      strokeWidth: 5,
-      tip: true,
-      title: d => "Wake County Avg",
-    }),
-    Plot.ruleY([0]),
-  ]
-})
+      // Plot.line(regLine, {
+      //   x: d => d[0],
+      //   y: d => d[1],
+      //   stroke: "white",
+      //   strokeDasharray: "4,2",
+      //   strokeWidth: 5,
+      //   tip: true,
+      //   title: d => "Wake County Avg",
+      // }),
+      Plot.ruleY([0]),
+    ]
+  })
 }
 ```
 
+<!-- singleMotherCompData -->
 ```js
 let singleMotherCompData = singleMotherCompFunc(wcHouseYearsMap)
-let regression = regressionLinear()
-  .x(d => d.year)
-  .y(d => d.perc)
-let regLine = regression(singleMotherCompData)
+// let regression = regressionLinear()
+//   .x(d => d.year)
+//   .y(d => d.perc)
+// let regLine = regression(singleMotherCompData)
+```
 
-function launchCompHouseholdYears(data, {width} = {}) {
-(singleMotherCompData)
+<!-- sortedFilteredSMCompsByLocation -->
+```js
+const filteredSingleMomCompsByLocation = []
+for (const d of singleMotherCompData) {
+  // Filter based on list of locations
+  for (let location of locationArea) {
+    if (d.area == location) {
+      filteredSingleMomCompsByLocation.push(d)
+    }
+  }
+}
+
+const sortedFilteredSMCompsByLocation = filteredSingleMomCompsByLocation.sort(
+  (a,b) => d3.ascending(a.year, b.year)
+)
+```
+
+<!-- PLOT: launchCompHouseholdYears -->
+```js
+const launchCompHouseholdYears = (width, data, allData) => {
   return Plot.plot({
-  title: "Percentage of  Single Female w/ Children Households that Received SNAP",
-  style: {
-    fontSize: "18px",       // increases overall font size
-    fontFamily: "sans-serif",
-    fontWeight: "bold"
-  },
-  width: 1500,
-  height: 600,
-  marginLeft: 60,
-  marginBottom: 60,
-  marginTop: 50,
-  y: {
-    grid: true,
-    label: "% of Households",
-    labelAnchor: "top",
+    title: "Percentage of Single Female w/ Children Households that Received SNAP",
+    // style: {
+    //   fontSize: "18px",
+    //   fontFamily: "sans-serif",
+    //   fontWeight: "bold"
+    // },
+    // width: 1500,
+    // height: 600,
+    // marginLeft: 60,
+    // marginBottom: 60,
+    // marginTop: 50,
+    y: {
+      grid: true,
+      label: "% of Households",
+      labelAnchor: "top",
+      domain: [0, 100],
     },
-  x: {
-    label: "Year",
-    tickPadding: 5,
-    domain: d3.range(2015, 2024), // explicit integer years
-    tickFormat: d3.format("d"),   // format without commas/decimals
-  },
-  color: {
-    scheme: "spectral",
-    legend: true,
-  },
-  marks: [
-    Plot.line(singleMotherCompData,
-      {
-        x:"year",
-        y:"perc",
-        stroke: "area",
-        strokeWidth: 3,
-        tip:true
-      },
-    ),
+    x: {
+      label: "Year",
+      // tickPadding: 5,
+      interval: 1, // explicit integer years
+      tickFormat: d3.format("d"),   // format without commas/decimals
+    },
+    color: {
+      scheme: "category10",
+      legend: true,
+    },
+    marks: [
+      Plot.lineY(
+        data,
+        {
+          x:"year",
+          y:"perc",
+          stroke: "area",
+          // strokeWidth: 3,
+          tip: true,
+        },
+      ),
+      // LINDGREN: Observable's builtin, as per my example from chp 2
+      Plot.linearRegressionY(
+        // LINDGREN: Ensures this line is based on all data
+        allData,
+        {
+          x: "year",
+          y: "perc",
+        }
+      ),
       // Regression line (county-wide trend)
-    Plot.line(regLine, {
-      x: d => d[0],
-      y: d => d[1],
-      stroke: "white",
-      strokeDasharray: "4,2",
-      strokeWidth: 5,
-      tip: true,
-      title: d => "Wake County Avg",
-    }),
-    Plot.ruleY([0]),
-  ]
-})
+      // Plot.line(regLine, {
+      //   x: d => d[0],
+      //   y: d => d[1],
+      //   stroke: "white",
+      //   strokeDasharray: "4,2",
+      //   strokeWidth: 5,
+      //   tip: true,
+      //   title: d => "Wake County Avg",
+      // }),
+      Plot.ruleY([0]),
+    ]
+  })
 }
 ```
-### Single Female Households (with children) Over the Last Decade
+
 <!-- single mother over decade  -->
-<div class="grid grid-cols-1">
+<div class="grid grid-cols-2">
   <div class="card">
-    ${resize((width) => launchHouseholdYears(singleMotherData, {width}))}
+    ${resize((width) => launchHouseholdYears(width, sortedFilteredSMBL, singleMotherData))}
   </div>
+
   <div class="card">
-    ${resize((width) => launchCompHouseholdYears(singleMotherData, {width}))}
+    ${resize((width) => launchCompHouseholdYears(width, sortedFilteredSMCompsByLocation, singleMotherData))}
   </div>
+
 </div>
-<div>
-Overall the percentage SNAP households with a female householder and children has remained steady over the past decade. The same is true when comparing SNAP and non-SNAP single women with children. Although each township shows individual variability over the years, the Wake County avg has slightly decreased over the past decade.
-</div>
-<br>
 
 ## Disability Status
 
+
+<!-- LINDGREN:
+  With a little more time, you would export/import most of this processing code
+-->
+
+<!-- PLOT: launchDisCounts -->
 ```js
 let snapDisCount = disabilityCountFunc(snapDisabilities)
 let snapDisMap = disabilityMapFunc(snapDisCount)
@@ -600,7 +704,8 @@ let centroids = countyGeoJSON.features.map(f => {
   let [lon, lat] = d3.geoCentroid(f);
   return { lon, lat, name: f.properties.NAME };
 });
-console.log(countyGeoJSON.features[2].properties);
+// LINDGREN: Another console log to delete
+// console.log(countyGeoJSON.features[2].properties);
 
 function spatialSnapWithDis(data, {width}){
   return Plot.plot({
@@ -636,9 +741,11 @@ function spatialSnapWithDis(data, {width}){
 })}
 ```
 
+
 ```js
 let wcDisPerc = disabilityCountFunc(snapDisabilities)
-console.log(wcDisPerc)
+// LINDGREN: Another console log to delete
+// console.log(wcDisPerc)
 
 let areaPercDisOnSnap = new Map(
   wcDisPerc.map(d => [d.area, d.percDisOnSnap])
@@ -659,7 +766,8 @@ let centroids = countyGeoJSON.features.map(f => {
   let [lon, lat] = d3.geoCentroid(f);
   return { lon, lat, name: f.properties.NAME };
 });
-console.log(countyGeoJSON.features[2].properties);
+// LINDGREN: Another console log to delete
+// console.log(countyGeoJSON.features[2].properties);
 
 function spatialDisonSnap (data, {width}){
   return Plot.plot({
@@ -703,10 +811,8 @@ function spatialDisonSnap (data, {width}){
     ${resize((width) => spatialSnapWithDis(countyGeoJSON, {width}))}
   </div>
 </div>
-<div>
-  About half of all households that receive SNAP benefits have at least 1 individual with a disability. Approximately 8.6% of the Wake County population has a disability. A large portion of these individuals are unemployed and may not be able to work because of their disability. Disability come in many forms, from physical disabilities impacting mobility, vision, or hearing, developmental disabilities, and mental health conditions. Most workplaces and public services are not prepared to accomodate different disabilities making it harder for these individuals to find and keep work (or simply navigate to work). Potential SNAP cuts may prevent these residents (who have increased employment limitations) from receiving necessary supplemental income for food
-</div>
-<br>
+
+About half of all households that receive SNAP benefits have at least 1 individual with a disability. Approximately 8.6% of the Wake County population has a disability. A large portion of these individuals are unemployed and may not be able to work because of their disability. Disability come in many forms, from physical disabilities impacting mobility, vision, or hearing, developmental disabilities, and mental health conditions. Most workplaces and public services are not prepared to accomodate different disabilities making it harder for these individuals to find and keep work (or simply navigate to work). Potential SNAP cuts may prevent these residents (who have increased employment limitations) from receiving necessary supplemental income for food
 
 <div class="grid grid-cols-1">
   <div class="card">
@@ -716,10 +822,9 @@ function spatialDisonSnap (data, {width}){
     ${resize((width) => spatialDisonSnap(countyGeoJSON, {width}))}
   </div>
 </div>
-<div>
+
 A significant percentage of households with at least one individual with a disability do not receive SNAP. Some townships had no households with disabled individuals receiving SNAP. Meanwhile, over 25% of Raleigh's  households with at least one individual with a disability received SNAP benefits. 
-</div>
-<br>
+
 
 ## Individuals Over 60 Years Old
 
@@ -813,7 +918,8 @@ let centroids = countyGeoJSON.features.map(f => {
   let [lon, lat] = d3.geoCentroid(f);
   return { lon, lat, name: f.properties.NAME };
 });
-console.log(countyGeoJSON.features.map(f => f.properties.percSnapOver60));
+// LINDGREN: Another console log to delete
+// console.log(countyGeoJSON.features.map(f => f.properties.percSnapOver60));
 
 
 function spatialSnapOverSixty(geojson, {width}) {
@@ -878,7 +984,8 @@ let centroids = countyGeoJSON.features.map(f => {
   let [lon, lat] = d3.geoCentroid(f);
   return { lon, lat, name: f.properties.NAME };
 });
-console.log(countyGeoJSON.features.map(f => f.properties.percOver60OnSnap));
+// LINDGREN: Another console log to delete
+// console.log(countyGeoJSON.features.map(f => f.properties.percOver60OnSnap));
 
 
 function spatialOnlyOverSixty(geojson, {width}) {
@@ -929,10 +1036,9 @@ function spatialOnlyOverSixty(geojson, {width}) {
    ${spatialSnapOverSixty(countyGeoJSON, {width})}
   </div>
 </div>
-<div>
-  Approximately 1/3 of all SNAP households in Wake County had at least one individual 60 years or older. In some townships like Marks Creek and Little River, over half of all SNAP households had at least one individual 60 years or older. Parts of Northern County had a smaller percentage of elderly individuals on SNAP.
-</div>
-<br>
+
+Approximately 1/3 of all SNAP households in Wake County had at least one individual 60 years or older. In some townships like Marks Creek and Little River, over half of all SNAP households had at least one individual 60 years or older. Parts of Northern County had a smaller percentage of elderly individuals on SNAP.
+
 <div class="grid grid-cols-1">
    <div class="card">
     ${resize((width) => launchOnlyOverSixty(only60, {width}))}
@@ -941,23 +1047,14 @@ function spatialOnlyOverSixty(geojson, {width}) {
    ${spatialOnlyOverSixty(countyGeoJSON, {width})}
   </div>
 </div>
-<div>
-  Compared to the percentage of SNAP houses with an elderly individual, only a small percentage of all individuals 60+ years old receive SNAP benefits in Wake County. The highest concentration of 60+ year old SNAP recipients was found in Eastern Wake County. Townships in the western part of the county only had 0-3% of individuals 60 years or older on SNAP.
-</div>
-<br>
+
+Compared to the percentage of SNAP houses with an elderly individual, only a small percentage of all individuals 60+ years old receive SNAP benefits in Wake County. The highest concentration of 60+ year old SNAP recipients was found in Eastern Wake County. Townships in the western part of the county only had 0-3% of individuals 60 years or older on SNAP.
 
 ## Final Thoughts
-<div>
-  <span>
-    SNAP was created to assist our most vulnerable residents: those with low-income,    children, the elderly, and people with disabilities. Based on the demographics data collected an analyzed, SNAP is being utilized by these vulernable and marginalized populations. Large percentages of SNAP households in Wake County, NC contain a person over 60, a individual with a disability, and/or a child (specfically a Child living under a single female head-of-house.) Additionally, we can assume (based on the percentages showcased) that intersectionality plays a part in these demographics of SNAP recipients. For example, a single female householder may also have a disabiltiy. However, the ACS datasets are too narrow to say how often intersecting identities occur in SNAP households. These demographics help grasp which groups of people are most impacted by government shutdowns and reducing SNAP funding. Overall, central and eastern Wake County house these most vulnerable residents. During times of reduced SNAP funding, these areas may need additional support from the community and local government.
-  </span>
-  <br></br>
-  <span>
-    As noted in the data analysis regarding individuals with disabilities and people over 60, many household falling into these groups do not receive SNAP benefits. These households may not need benefits and have suffcient resources to support themselves without supplemental income. However, 51% of food insecure people in Wake County do not qualify for SNAP. It is likely more individuals belonging to theses vulernable populations need additional assistance they are not currently receiving.
-  </span>
-</div>
 
-<br>
+SNAP was created to assist our most vulnerable residents: those with low-income,    children, the elderly, and people with disabilities. Based on the demographics data collected an analyzed, SNAP is being utilized by these vulernable and marginalized populations. Large percentages of SNAP households in Wake County, NC contain a person over 60, a individual with a disability, and/or a child (specfically a Child living under a single female head-of-house.) Additionally, we can assume (based on the percentages showcased) that intersectionality plays a part in these demographics of SNAP recipients. For example, a single female householder may also have a disabiltiy. However, the ACS datasets are too narrow to say how often intersecting identities occur in SNAP households. These demographics help grasp which groups of people are most impacted by government shutdowns and reducing SNAP funding. Overall, central and eastern Wake County house these most vulnerable residents. During times of reduced SNAP funding, these areas may need additional support from the community and local government.
+
+As noted in the data analysis regarding individuals with disabilities and people over 60, many household falling into these groups do not receive SNAP benefits. These households may not need benefits and have suffcient resources to support themselves without supplemental income. However, 51% of food insecure people in Wake County do not qualify for SNAP. It is likely more individuals belonging to theses vulernable populations need additional assistance they are not currently receiving.
 
 ## Data & Resources 
  
