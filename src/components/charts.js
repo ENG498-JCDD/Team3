@@ -28,8 +28,9 @@ export const monthlyNationalGrossSnapIncome = (width, height, data, xCol, yCol, 
   const yDomain = [0, d3.max(acsMGI, d => d.mean_mgi)];
 
   return Plot.plot({
+    title: "Annual Changes in SNAP's Monthly Gross Income Limit vs. Average Mean & Median Household US Income",
     width: width,
-    height: height-50,
+    height: height-150,
     //added grid, axis labels, domain limits for y-axis
     // LINDGREN: Added `interval: 1` to define annual delimit
     x: {grid: true, label: "Fiscal Year", tickFormat: "", interval: 1},
@@ -71,6 +72,10 @@ export const monthlyNationalGrossSnapIncome = (width, height, data, xCol, yCol, 
           stroke: "Household",
           marker: true,
         }
+      ),
+      Plot.tip(
+        [`In 2025, a family of four would need an approximately $9,250 per month to live comfortably and cover their basic needs in Wake County.`],
+        {x: 2025, y: acsMGI.find( (d) => (d.Household == "Alaska" && d.year == 2025) ), dy: 1, anchor: "bottom"},
       ),
     ],
     color: {

@@ -57,6 +57,8 @@ const aboveSNAPThresholdArray = aboveSNAPThresholdDatasets.flatMap(([area, rows]
 
 ## FY 2020-2026 SNAP Gross Monthly Income Limits for Household of 4 (in Contiguous United States/D.C./Guam/Virgin Islands, Alaska, and Hawaii)*
 
+The chart below plots annual changes in the monthly gross income limit (to qualify for SNAP benefits) for a 4-person household over six consecutive fiscal years (October 1, 2019 to September 30, 2026). [<em>Data from the USDA website.</em>]
+
 <!-- LINDGREN
   Wanted to show you how to simplify your notebook space
   by exporting/importing your chart components.
@@ -80,9 +82,6 @@ const aboveSNAPThresholdArray = aboveSNAPThresholdDatasets.flatMap(([area, rows]
 -->
 <div class="note">
   <p>
-    The graph above charts annual changes in the monthly gross income limit (to qualify for SNAP benefits) for a 4-person household over six consecutive fiscal years (October 1, 2019 to September 30, 2026). [<em>Data from the USDA website.</em>]
-  </p>
-  <p>
     The monthly gross income limit is 130% of the poverty level.
   </p>
   <p>
@@ -105,8 +104,11 @@ const aboveSNAPThresholdArray = aboveSNAPThresholdDatasets.flatMap(([area, rows]
   Yet, I appreciate your thoughtful headings throughout your work.
 -->
 
+The chart below plots annual changes in average monthly SNAP benefits (in dollars) per SNAP participant nationally from FY1969 to FY2024. [<em>Data from the USDA website.</em>]
+
 ```js
-Plot.plot({
+const plotAnnualSnapBenChanges = Plot.plot({
+  title: "Annual Changes in Average Monthly SNAP Benefits ($)",
   x: {
     label: "Fiscal Year",
     domain: [1969, 2030]
@@ -124,9 +126,18 @@ Plot.plot({
 })
 ```
 
+<div class="grid grid-cols-1" style="grid-auto-rows: 600px;">
+
+  <div class="card">
+    <!-- Import the chart here -->
+    ${resize((width, height) => plotAnnualSnapBenChanges)}
+  </div>
+
+</div>
+
 <div class="note">
   <p>
-    The graph above charts annual changes in average monthly SNAP benefits (in dollars) per SNAP participant nationally from FY1969 to FY2024. [<em>Data from the USDA website.</em>]
+
   </p>
   <p>
     The graph indicates a fairly steady increase in monthly SNAP benefits from FY1969 (first year of the SNAP program) until about FY2019. <strong>Between FY2019 and FY2021, monthly benefits increased by about $85</strong> (<em>compare this to an average yearly increase of approximately $2.46 between FY1969 and FY2019</em>).
