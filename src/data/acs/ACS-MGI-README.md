@@ -1,0 +1,1 @@
+Source for monthly incomes: https://data.census.gov/table/ACSST1Y2024.S1901?q=Income+and+Poverty
